@@ -11,8 +11,8 @@ SCREEN_HEIGHT = 720
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Leap Frog')
 
-#road_bg = pygame.image.load('road2.jpg').convert()
-#road_bg = pygame.transform.scale(road_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
+road_bg = pygame.image.load('road2.jpg').convert()
+road_bg = pygame.transform.scale(road_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 swamp_bg = pygame.image.load('bg.jpg').convert()
 swamp_bg = pygame.transform.scale(swamp_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
