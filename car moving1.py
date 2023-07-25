@@ -1,9 +1,13 @@
+
+
+
 import pygame
 from pygame import mixer
 import sys
 import random
 
 pygame.init()
+pygame.mixer.init()
 clock = pygame.time.Clock()
 
 SCREEN_WIDTH = 1080
@@ -11,10 +15,10 @@ SCREEN_HEIGHT = 720
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Leap Frog')
 
-#road_bg = pygame.image.load('road2.jpg').convert()
-#road_bg = pygame.transform.scale(road_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
+road_bg = pygame.image.load('Images/road2.jpg').convert()
+road_bg = pygame.transform.scale(road_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-swamp_bg = pygame.image.load('bg.jpg').convert()
+swamp_bg = pygame.image.load('Images/bg.jpg').convert()
 swamp_bg = pygame.transform.scale(swamp_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 BG_ROAD_SIZE = 1080
@@ -25,7 +29,7 @@ level = 1
 
 level2 = 2
 
-mixer.music.load("Swamps Nature.wav")
+mixer.music.load("Images/Swamps Nature.wav")
 mixer.music.play(-1)  # play non-stop
 
 
@@ -45,33 +49,33 @@ class Player(pygame.sprite.Sprite):
         self.sprites_up = []
         self.sprites_down = []
 
-        self.sprites_right.append(pygame.image.load('frog-right1.png').convert())
-        self.sprites_right.append(pygame.image.load('frog-right2.png').convert())
-        self.sprites_right.append(pygame.image.load("frog-right3.png").convert())
-        self.sprites_right.append(pygame.image.load('frog-right4.png').convert())
-        self.sprites_right.append(pygame.image.load('frog-right5.png').convert())
-        self.sprites_right.append(pygame.image.load('frog-right6.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right1.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right2.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right3.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right4.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right5.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right6.png').convert())
 
-        self.sprites_left.append(pygame.image.load('frog-left1.png').convert())
-        self.sprites_left.append(pygame.image.load('frog-left2.png').convert())
-        self.sprites_left.append(pygame.image.load('frog-left3.png').convert())
-        self.sprites_left.append(pygame.image.load('frog-left4.png').convert())
-        self.sprites_left.append(pygame.image.load('frog-left5.png').convert())
-        self.sprites_left.append(pygame.image.load('frog-left6.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left1.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left2.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left3.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left4.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left5.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left6.png').convert())
 
-        self.sprites_up.append(pygame.image.load('frog-up1.png').convert())
-        self.sprites_up.append(pygame.image.load('frog-up2.png').convert())
-        self.sprites_up.append(pygame.image.load('frog-up3.png').convert())
-        self.sprites_up.append(pygame.image.load('frog-up4.png').convert())
-        self.sprites_up.append(pygame.image.load('frog-up5.png').convert())
-        self.sprites_up.append(pygame.image.load('frog-up6.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up1.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up2.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up3.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up4.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up5.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up6.png').convert())
 
-        self.sprites_down.append(pygame.image.load('frog-down1.png').convert())
-        self.sprites_down.append(pygame.image.load('frog-down2.png').convert())
-        self.sprites_down.append(pygame.image.load('frog-down3.png').convert())
-        self.sprites_down.append(pygame.image.load('frog-down4.png').convert())
-        self.sprites_down.append(pygame.image.load('frog-down5.png').convert())
-        self.sprites_down.append(pygame.image.load('frog-down6.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down1.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down2.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down3.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down4.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down5.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down6.png').convert())
 
         self.current_sprite = 0
         self.image = self.sprites_right[self.current_sprite]
@@ -184,10 +188,10 @@ class Car(pygame.sprite.Sprite):
 # Create cars
 cars = pygame.sprite.Group()
 car_images_right = [
-    "car1-right.png", "car2-right.png", "car3-right.png", "car4-right.png", "car5-right.png", "car6-right.png"
+    "Images/car1-right.png", "Images/car2-right.png", "Images/car3-right.png", "Images/car4-right.png", "Images/car5-right.png", "Images/car6-right.png"
 ]
 car_images_left = [
-    "car1-left.png", "car2-left.png", "car3-left.png", "car4-left.png", "car5-left.png", "car6-left.png"
+    "Images/car1-left.png", "Images/car2-left.png", "Images/car3-left.png", "Images/car4-left.png", "Images/car5-left.png", "Images/car6-left.png"
 ]
 
 # Cars 1 to 6 move from left to right
@@ -218,7 +222,7 @@ for i in range(6):
 class New_level(pygame.sprite.Sprite): # snippet of image on top of screen taking player to second background
     def __init__(self, pos_x, pos_y, speed):
         super().__init__()
-        self.image = pygame.image.load('beginning level1.jpg').convert()
+        self.image = pygame.image.load('Images/beginning level1.jpg').convert()
         self.image = pygame.transform.scale(self.image, (1090, 230))
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
@@ -251,11 +255,11 @@ class Health_bar:
         if self.player.alive == False:
             self.screen.fill((0, 0, 0))
           
-            game_over_sound = mixer.Sound("game over.wav")
+#            game_over_sound = mixer.Sound("game over.wav")
             
-            game_over_sound.play()
+#            game_over_sound.play()
           
-            game_over = pygame.image.load('game over.jpg').convert()
+            game_over = pygame.image.load('Images/game over.jpg').convert()
            
             game_over_rect = game_over.get_rect()
             game_over_rect.center = (500, 300)
@@ -310,25 +314,25 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
-        Jump_sound = mixer.Sound("jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_right()
         
     elif keys[pygame.K_LEFT]:
-        Jump_sound = mixer.Sound("jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_left()
        
     elif keys[pygame.K_UP]:
-        Jump_sound = mixer.Sound("jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_up()
         
     elif keys[pygame.K_DOWN]:
-        Jump_sound = mixer.Sound("jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_down()
@@ -360,7 +364,7 @@ while running:
        
         for car in cars.sprites():
             car.kill() # remove cars
-        current_background = pygame.image.load('bg.jpg').convert()
+        current_background = pygame.image.load('Images/bg.jpg').convert()
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
         #player.frog_position = 700
         #player.rect = player.frog_position
