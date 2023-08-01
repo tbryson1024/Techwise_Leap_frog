@@ -1,5 +1,7 @@
 import pygame
+import subprocess #allows you to run other Python scripts
 pygame.init()
+
 
 screen_width = 800
 screen_height = 600
@@ -47,7 +49,10 @@ def handle_button_click(mouse_pos):
     quit_button_x, quit_button_y, quit_button_width, quit_button_height = screen_width // 2 - 100, 400, 200, 50
 
     if start_button_x <= mouse_pos[0] <= start_button_x + start_button_width and start_button_y <= mouse_pos[1] <= start_button_y + start_button_height:
-        print("Start button clicked!")
+        #print("Start button clicked!")
+
+        subprocess.call(["python3", "car moving1.py"])
+
         # switch to the gameplay screen
         run_gameplay_screen()
     elif quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width and quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height:
