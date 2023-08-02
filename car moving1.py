@@ -1,3 +1,6 @@
+
+
+
 import pygame
 from pygame import mixer
 import sys
@@ -12,77 +15,95 @@ SCREEN_HEIGHT = 720
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Leap Frog')
 
-road_bg = pygame.image.load('Techwise_Leap_frog/Images/road2.jpg').convert()
+road_bg = pygame.image.load('Images/road2.jpg').convert()
 road_bg = pygame.transform.scale(road_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-swamp_bg = pygame.image.load('Techwise_Leap_frog/Images/bg1.png').convert()
+swamp_bg = pygame.image.load('Images/bg.jpg').convert()
 swamp_bg = pygame.transform.scale(swamp_bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 BG_ROAD_SIZE = 1080
 
 BG_SWAMP_SIZE = 1080
 
+level = 1
 
-mixer.music.load("Techwise_Leap_frog/Images/Swamps Nature.wav")
+level2 = 2
+
+mixer.music.load("Images/Swamps Nature.wav")
 mixer.music.play(-1)  # play non-stop
+
+
 
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
 
     def __init__(self, pos_x, pos_y):
         super().__init__()
-        self.health = 100  # health bar start width
-        self.lives = 1 # number of lives
+        self.health = 250  # health bar start width
+        self.lives = 3 # number of lives
         self.alive = True
+       
         self.is_animating = False
         self.sprites_right = []
         self.sprites_left = []
         self.sprites_up = []
         self.sprites_down = []
 
-        self.sprites_right.append(pygame.image.load('Techwise_Leap_frog/Images/frog-right1.png').convert())
-        self.sprites_right.append(pygame.image.load('Techwise_Leap_frog/Images/frog-right2.png').convert())
-        self.sprites_right.append(pygame.image.load('Techwise_Leap_frog/Images/frog-right3.png').convert())
-        self.sprites_right.append(pygame.image.load('Techwise_Leap_frog/Images/frog-right4.png').convert())
-        self.sprites_right.append(pygame.image.load('Techwise_Leap_frog/Images/frog-right5.png').convert())
-        self.sprites_right.append(pygame.image.load('Techwise_Leap_frog/Images/frog-right6.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right1.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right2.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right3.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right4.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right5.png').convert())
+        self.sprites_right.append(pygame.image.load('Images/frog-right6.png').convert())
 
-        self.sprites_left.append(pygame.image.load('Techwise_Leap_frog/Images/frog-left1.png').convert())
-        self.sprites_left.append(pygame.image.load('Techwise_Leap_frog/Images/frog-left2.png').convert())
-        self.sprites_left.append(pygame.image.load('Techwise_Leap_frog/Images/frog-left3.png').convert())
-        self.sprites_left.append(pygame.image.load('Techwise_Leap_frog/Images/frog-left4.png').convert())
-        self.sprites_left.append(pygame.image.load('Techwise_Leap_frog/Images/frog-left5.png').convert())
-        self.sprites_left.append(pygame.image.load('Techwise_Leap_frog/Images/frog-left6.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left1.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left2.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left3.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left4.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left5.png').convert())
+        self.sprites_left.append(pygame.image.load('Images/frog-left6.png').convert())
 
-        self.sprites_up.append(pygame.image.load('Techwise_Leap_frog/Images/frog-up1.png').convert())
-        self.sprites_up.append(pygame.image.load('Techwise_Leap_frog/Images/frog-up2.png').convert())
-        self.sprites_up.append(pygame.image.load('Techwise_Leap_frog/Images/frog-up3.png').convert())
-        self.sprites_up.append(pygame.image.load('Techwise_Leap_frog/Images/frog-up4.png').convert())
-        self.sprites_up.append(pygame.image.load('Techwise_Leap_frog/Images/frog-up5.png').convert())
-        self.sprites_up.append(pygame.image.load('Techwise_Leap_frog/Images/frog-up6.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up1.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up2.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up3.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up4.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up5.png').convert())
+        self.sprites_up.append(pygame.image.load('Images/frog-up6.png').convert())
 
-        self.sprites_down.append(pygame.image.load('Techwise_Leap_frog/Images/frog-down1.png').convert())
-        self.sprites_down.append(pygame.image.load('Techwise_Leap_frog/Images/frog-down2.png').convert())
-        self.sprites_down.append(pygame.image.load('Techwise_Leap_frog/Images/frog-down3.png').convert())
-        self.sprites_down.append(pygame.image.load('Techwise_Leap_frog/Images/frog-down4.png').convert())
-        self.sprites_down.append(pygame.image.load('Techwise_Leap_frog/Images/frog-down5.png').convert())
-        self.sprites_down.append(pygame.image.load('Techwise_Leap_frog/Images/frog-down6.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down1.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down2.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down3.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down4.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down5.png').convert())
+        self.sprites_down.append(pygame.image.load('Images/frog-down6.png').convert())
 
         self.current_sprite = 0
         self.image = self.sprites_right[self.current_sprite]
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-        self.direction = "up"
+        self.direction = "right"
 
-        self.frog_sprites = [self.sprites_right,self.sprites_left,self.sprites_up,self.sprites_down]
+        # Set color to be removed for each loaded image
+        for i in range(len(self.sprites_right)):
+            self.sprites_right[i].set_colorkey((0, 0, 0))
+            # Control the image size
+            self.sprites_right[i] = pygame.transform.scale(self.sprites_right[i], (70, 40))
 
-        for direction_sprites in self.frog_sprites:
-            for i in range(len(direction_sprites)):
-                direction_sprites[i].set_colorkey((0, 0, 0))
-                direction_sprites[i] = pygame.transform.scale(direction_sprites[i], (50, 50))
+        for i in range(len(self.sprites_left)):
+            self.sprites_left[i].set_colorkey((0, 0, 0))
+            # Control the image size
+            self.sprites_left[i] = pygame.transform.scale(self.sprites_left[i], (70, 40))
 
-      
+        for i in range(len(self.sprites_up)):
+            self.sprites_up[i].set_colorkey((0, 0, 0))
+            # Control the image size
+            self.sprites_up[i] = pygame.transform.scale(self.sprites_up[i], (70, 40))
+
+        for i in range(len(self.sprites_down)):
+            self.sprites_down[i].set_colorkey((0, 0, 0))
+            # Control the image size
+            self.sprites_down[i] = pygame.transform.scale(self.sprites_down[i], (70, 40))# frog size
 
     def move_right(self):
         if self.rect.x < SCREEN_WIDTH - self.rect.width:
@@ -140,17 +161,6 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.topleft = self.frog_position
 
-    def get_mask(self):
-        return pygame.mask.from_surface(self.image)
-    
-    def reset_player(self):
-        self.frog_position = [500, 675]  # Initial position of the frog
-        self.rect.topleft = self.frog_position
-        self.direction = "up"
-        self.health = 100
-        self.lives = 1
-        self.alive = True
-
 
 class Car(pygame.sprite.Sprite):
     def __init__(self, image_path, pos_x, pos_y, speed):
@@ -160,8 +170,6 @@ class Car(pygame.sprite.Sprite):
         self.rect.x = pos_x
         self.rect.y = pos_y
         self.speed = speed
-        
-
 
     def update(self):
         self.rect.x += self.speed
@@ -169,32 +177,29 @@ class Car(pygame.sprite.Sprite):
             self.reset_position()
         elif self.speed < 0 and self.rect.right < 0:
             self.reset_position()
-        
 
     def reset_position(self):
         if self.speed > 0:
             self.rect.right = 0
         else:
             self.rect.left = SCREEN_WIDTH
-    
-    def get_mask(self):
-        return pygame.mask.from_surface(self.image)
+
 
 # Create cars
 cars = pygame.sprite.Group()
 car_images_right = [
-    "Techwise_Leap_frog/Images/car1-right.png", "Techwise_Leap_frog/Images/car2-right.png", "Techwise_Leap_frog/Images/car3-right.png", "Techwise_Leap_frog/Images/car4-right.png", "Techwise_Leap_frog/Images/car5-right.png", "Techwise_Leap_frog/Images/car6-right.png"
+    "Images/car1-right.png", "Images/car2-right.png", "Images/car3-right.png", "Images/car4-right.png", "Images/car5-right.png", "Images/car6-right.png"
 ]
 car_images_left = [
-    "Techwise_Leap_frog/Images/car1-left.png", "Techwise_Leap_frog/Images/car2-left.png", "Techwise_Leap_frog/Images/car3-left.png", "Techwise_Leap_frog/Images/car4-left.png", "Techwise_Leap_frog/Images/car5-left.png", "Techwise_Leap_frog/Images/car6-left.png"
+    "Images/car1-left.png", "Images/car2-left.png", "Images/car3-left.png", "Images/car4-left.png", "Images/car5-left.png", "Images/car6-left.png"
 ]
 
 # Cars 1 to 6 move from left to right
 for i in range(6):
     image_path = car_images_right[i]
     pos_x = -random.randint(100, 300)  # Starting offscreen from the left
-    pos_y = 40 + i * 95  # Adjust the spacing between cars
-    speed = random.randint(7, 11)  # Random speed 
+    pos_y = 40 + i * 80  # Adjust the spacing between cars
+    speed = random.randint(3, 7)  # Random speed between 3 and 7
     car = Car(image_path, pos_x, pos_y, speed)
     car.image = pygame.image.load(image_path).convert()  # Load the image
     car.image.set_colorkey((0, 0, 0))  # Remove the black background
@@ -205,8 +210,8 @@ for i in range(6):
 for i in range(6):
     image_path = car_images_left[i]
     pos_x = SCREEN_WIDTH + random.randint(100, 300)  # Starting offscreen from the right
-    pos_y = 40 + i * 92  # Adjust the spacing between cars
-    speed = -random.randint(5, 10)  # Random  speed 
+    pos_y = 40 + i * 80  # Adjust the spacing between cars
+    speed = -random.randint(3, 7)  # Random negative speed between -3 and -7
     car = Car(image_path, pos_x, pos_y, speed)
     car.image = pygame.image.load(image_path).convert()  # Load the image
     car.image.set_colorkey((0, 0, 0))  # Remove the black background
@@ -215,91 +220,17 @@ for i in range(6):
 
 
 class New_level(pygame.sprite.Sprite): # snippet of image on top of screen taking player to second background
-    def __init__(self, pos_x, pos_y):
+    def __init__(self, pos_x, pos_y, speed):
         super().__init__()
-        self.image = pygame.image.load('Techwise_Leap_frog/Images/beginning level1.jpg').convert()
-        self.image = pygame.transform.scale(self.image, (1090, 250))
+        self.image = pygame.image.load('Images/beginning level1.jpg').convert()
+        self.image = pygame.transform.scale(self.image, (1090, 230))
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-      
-       
-    def update(self):
-        screen.blit(self.image, self.rect)
-
-
-class Lake(pygame.sprite.Sprite): # snippet of lake image on top of background
-    def __init__(self, pos_x, pos_y):
-        super().__init__()
-        self.image = pygame.image.load('Techwise_Leap_frog/Images/lake.png').convert()
-        self.image = pygame.transform.scale(self.image, (1080, 390))
-        self.rect = self.image.get_rect()
-        self.rect.x = pos_x
-        self.rect.y = pos_y
-        self.layer = 1
-      
-       
+        self.speed = speed
 
     def update(self):
         screen.blit(self.image, self.rect)
-
-
-class Gator(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y):
-        super().__init__()
-        
-        self.sprites = []
-        self.is_animating = True
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-right1.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-right2.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-right3.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-right4.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-left1.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-left2.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-left3.png').convert())
-        self.sprites.append(pygame.image.load('Techwise_Leap_frog/Images/gator-left4.png').convert())
-      
-        # Set color to be removed for each loaded image
-        for i in range(len(self.sprites)):
-            self.sprites[i].set_colorkey((255, 255, 255))
-            # Control the image size
-            self.sprites[i] = pygame.transform.scale(self.sprites[i], (100, 100))
-        
-        self.current_sprite = 0
-        self.image = self.sprites[self.current_sprite]
-        self.rect = self.image.get_rect()
-        self.rect.x = pos_x
-        self.rect.y = pos_y
-
-        self.speed = random.randrange(1, 4)
-
-    def animate(self):
-        self.is_animating = True
-
-    def update(self, speed=0.1):
-        if self.is_animating:
-            self.current_sprite += speed
-            if self.current_sprite >= len(self.sprites):
-                self.current_sprite = 0
-                self.is_animating = True
-
-            self.rect.x += self.speed
-            if self.rect.right > SCREEN_WIDTH:
-                self.rect.x = -self.rect.width  # Wrap the alligator to the left side of the screen
-                #self.rect.y = SCREEN_HEIGHT - self.rect.height  # Reset the position at the bottom of the screen
-                self.rect.y = pos_y
-                self.speed = random.randrange(1, 4)
-
-            self.image = self.sprites[int(self.current_sprite)]
-        else:
-            self.rect.x += self.speed
-            if self.rect.right > SCREEN_WIDTH:
-                self.kill()
-
-
-
-    def get_mask(self):
-        return pygame.mask.from_surface(self.image)
 
 
 
@@ -307,12 +238,10 @@ class Health_bar:
     def __init__(self, player, screen):
         self.player = player
         self.screen = screen
-        self.health_bar_width = 100
+        self.health_bar_width = 250
         self.health_bar_height = 20
         self.health_bar_x = 10  # horizontal position of the health bar
         self.health_bar_y = 10  # vertical position of the health bar
-
-
 
     def draw_health_bars(self):
         pygame.draw.rect(self.screen, (255, 0, 0),
@@ -320,29 +249,37 @@ class Health_bar:
         pygame.draw.rect(self.screen, (0, 255, 0),
                          (self.health_bar_x, self.health_bar_y, self.player.health, self.health_bar_height))  # Health bar
      
-       # Player Health display
-        if not self.player.alive:
+        # Player Health display
+      
+   
+        if self.player.alive == False:
             self.screen.fill((0, 0, 0))
-            #game_over_sound = mixer.Sound("game over.wav")
-           # game_over_sound.play()
-            #game_over = pygame.image.load('game over.jpg').convert()
-            #game_over_rect = game_over.get_rect()
-            #game_over_rect.center = (500, 300)
+          
+#            game_over_sound = mixer.Sound("game over.wav")
+            
+#            game_over_sound.play()
+          
+            game_over = pygame.image.load('Images/game over.jpg').convert()
+           
+            game_over_rect = game_over.get_rect()
+            game_over_rect.center = (500, 300)
+
             font1 = pygame.font.Font('freesansbold.ttf', 35)
-            text1 = font1.render('Press SPACE to restart', True, (255, 255, 255))
+
+            text1 = font1.render('Press R to restart', True, (255, 255, 255))
+
             text1Rect = text1.get_rect()
             text1Rect.bottom = 550
             text1Rect.left = 350
-           # self.screen.blit(game_over, game_over_rect)
+
+            self.screen.blit(game_over, game_over_rect)
             self.screen.blit(text1, text1Rect)
+
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_SPACE]:
-               player.alive = True
-               player.lives = 1
-               player.health = 100
-               player.frog_position = [500, 675]  # Reset the player's position
-               player.rect.topleft = player.frog_position
-               player.direction = "up"
+            if keys[pygame.K_r]:
+                self.player.alive = True
+                self.player.lives = 5
+                self.player.health = 250
 
        
         #Print Lives to screen
@@ -354,39 +291,21 @@ class Health_bar:
     def update(self):
         self.draw_health_bars()
 
- # Initialize objects
-new_level = New_level(0, 0)
-lake = Lake(-2, 255)
-player = Player(Player.frog_position[0], Player.frog_position[1])
-alligator = Gator(100, 500)
+# print image to screen
+new_level = New_level(0, 0, 0)
 
+player = Player(Player.frog_position[0], Player.frog_position[1])
+
+# print Health_bar
 health_bar = Health_bar(player, screen)
 
-# Create sprite groups with ordem of apperance 
-background_sprites = pygame.sprite.LayeredUpdates()
-background_sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
-
-player_sprites = pygame.sprite.LayeredUpdates()
-player_sprites.add(player,background_sprites)  # Player sprites should be drawn on top of background
-
-car_sprites = pygame.sprite.LayeredUpdates()
-car_sprites.add(cars)  # Cars should be drawn on top of player and background
-
-lake_sprites = pygame.sprite.LayeredUpdates()
-
-alligators_sprites = pygame.sprite.LayeredUpdates()
-alligators_sprites.add(alligator)
-
-all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites, player_sprites, car_sprites)
-
+all_sprites = pygame.sprite.Group()
+all_sprites.add(player, cars, new_level)
 
 scroll_x = 0
 scroll_y = 0
 current_background = road_bg
-  
 
-#main loop
 running = True
 while running:
     for event in pygame.event.get():
@@ -395,25 +314,25 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
-        Jump_sound = mixer.Sound("Techwise_Leap_frog/Images/jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_right()
         
     elif keys[pygame.K_LEFT]:
-        Jump_sound = mixer.Sound("Techwise_Leap_frog/Images/jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_left()
        
     elif keys[pygame.K_UP]:
-        Jump_sound = mixer.Sound("Techwise_Leap_frog/Images/jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_up()
         
     elif keys[pygame.K_DOWN]:
-        Jump_sound = mixer.Sound("Techwise_Leap_frog/Images/jump.wav")
+        Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_down()
@@ -422,66 +341,34 @@ while running:
     if player.frog_position[0] >= BG_ROAD_SIZE:
        current_background = swamp_bg
 
+    screen.blit(current_background, (scroll_x, scroll_y))
+
+
+
 
     # Check for collision between player and cars
     for car in cars:
-        if pygame.sprite.collide_mask(player, car):
-            #if player.health > 0:
-                player.health -= 10 # Reduce player's health by 
+        if player.rect.colliderect(car.rect):
+            if player.health > 0:
+                player.health -= 1  # Reduce player's health by 1
                 if player.health == 0 and player.lives > 0:
                     player.lives -= 1
-                    player.health = 100
+                    player.health = 250
                 elif player.health == 0 and player.lives == 0:
-                    player.alive = False
+                     player.alive = False
 
     
       # Check for collision between player and new_level
     if player.rect.colliderect(new_level.rect):
         new_level.kill()
-        lake = Lake(-2, 255)  # Create the Lake and its position x, y
-        lake_sprites.add(lake)  # Add lake
-        all_sprites.add(background_sprites, player_sprites, alligators_sprites)
-
+       
         for car in cars.sprites():
             car.kill() # remove cars
-        current_background = pygame.image.load('Techwise_Leap_frog/Images/bg1.png').convert()
+        current_background = pygame.image.load('Images/bg.jpg').convert()
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        player.reset_player()
-
-        alligators = []
-        num_alligators = 4
-
-        for alligator in range(num_alligators):
-            alligator = Gator(200, 400)
-            alligators.append(alligator)
-            all_sprites.add(alligator)
-
-
-    
-    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+        #player.frog_position = 700
+        #player.rect = player.frog_position
   
-   
-    player_colliding_with_alligator = False
-
-    for gator in alligators_hit:
-        if not player_colliding_with_alligator:
-            player.health -= 10
-            if player.health == 0 and player.lives > 0:
-                player.lives -= 1
-                player.health = 100
-            elif player.health == 0 and player.lives == 0:
-                player.alive = False
-            player_colliding_with_alligator = True
-
-    if len(alligators_hit) == 0:
-        player_colliding_with_alligator = False
-
-    
-    screen.blit(current_background, (scroll_x, scroll_y))
-   
-    lake_sprites.draw(screen)
-
-    player_sprites.draw(screen)
 
     all_sprites.update()
     all_sprites.draw(screen)
