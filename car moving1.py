@@ -7,7 +7,7 @@ import sys
 import random
 
 pygame.init()
-pygame.mixer.init()
+pygame.mixer.init(devicename='directsound')
 clock = pygame.time.Clock()
 
 SCREEN_WIDTH = 1080
