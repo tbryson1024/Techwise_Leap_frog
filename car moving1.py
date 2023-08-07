@@ -23,8 +23,10 @@ BG_ROAD_SIZE = 1080
 BG_SWAMP_SIZE = 1080
 
 
-mixer.music.load("Images/Swamps Nature.wav")
+#mixer.music.load("Images/Swamps Nature.wav")
+mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
 mixer.music.play(-1)  # play non-stop
+
 
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
@@ -324,7 +326,7 @@ class Health_bar:
         if not self.player.alive:
             self.screen.fill((0, 0, 0))
             #game_over_sound = mixer.Sound("game over.wav")
-           # game_over_sound.play()
+            #game_over_sound.play()
             #game_over = pygame.image.load('game over.jpg').convert()
             #game_over_rect = game_over.get_rect()
             #game_over_rect.center = (500, 300)
