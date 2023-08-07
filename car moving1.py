@@ -441,7 +441,7 @@ lake_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
-logs_group = pygame.sprite.Group()
+logs_group = pygame.sprite.LayeredUpdates()
 logs_group.add(log1, log2, log3)
 
 all_sprites = pygame.sprite.LayeredUpdates()
@@ -506,7 +506,7 @@ while running:
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-        all_sprites.add(background_sprites, player_sprites, alligators_sprites)
+        all_sprites.add(background_sprites, player_sprites, alligators_sprites, logs_group)
 
         for car in cars.sprites():
             car.kill() # remove cars
