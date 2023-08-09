@@ -1,5 +1,5 @@
 import pygame
-from pygame import mixer
+from pygame import Surface, mixer
 import sys
 import random
 
@@ -22,6 +22,8 @@ BG_ROAD_SIZE = 1080
 
 BG_SWAMP_SIZE = 1080
 
+current_background = pygame.image.load('Images/road2.jpg').convert()
+current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 mixer.music.load("Images/Swamps Nature.wav")
 mixer.music.play(-1)  # play non-stop
@@ -105,6 +107,8 @@ class Player(pygame.sprite.Sprite):
             self.move(0, 3)
 
     def move(self, dx, dy):
+        self.dx = dx
+        self.dy = dy
         self.frog_position[0] += dx  # Update horizontal coordinate
         self.frog_position[1] += dy  # Update vertical coordinate
         self.rect.topleft = self.frog_position
@@ -129,14 +133,24 @@ class Player(pygame.sprite.Sprite):
                 self.current_sprite = 0
                 self.is_animating = False
 
-        if self.direction == "right":
-            self.image = self.sprites_right[int(self.current_sprite)]
-        elif self.direction == "left":
-            self.image = self.sprites_left[int(self.current_sprite)]
-        elif self.direction == "up":
-            self.image = self.sprites_up[int(self.current_sprite)]
-        elif self.direction == "down":
-            self.image = self.sprites_down[int(self.current_sprite)]
+        # Check if the player is on a log
+        on_log = False
+        for log in logs_group:
+            if pygame.sprite.collide_mask(self, log):
+                on_log = True
+                if not (keys[pygame.K_LEFT] or keys[pygame.K_RIGHT] or keys[pygame.K_UP] or keys[pygame.K_DOWN]):
+                    log.carry_player(self)  # Move the player with the log
+
+        # Update the frog's position based on movement and log interaction
+        if not on_log:
+            if self.direction == "right":
+                self.image = self.sprites_right[int(self.current_sprite)]
+            elif self.direction == "left":
+                self.image = self.sprites_left[int(self.current_sprite)]
+            elif self.direction == "up":
+                self.image = self.sprites_up[int(self.current_sprite)]
+            elif self.direction == "down":
+                self.image = self.sprites_down[int(self.current_sprite)]
 
         self.rect.topleft = self.frog_position
 
@@ -301,6 +315,56 @@ class Gator(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
+class Log(pygame.sprite.Sprite):
+    def __init__(self, image_path, pos_x, pos_y, speed):
+        super().__init__()
+        self.image_path = pygame.image.load(image_path).convert()
+        self.image = self.image_path
+        self.rect = self.image.get_rect()
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+        self.speed = random.randrange(1,4)  
+        self.player = None  # Player attribute
+        self.image = pygame.transform.scale(self.image, (150, 75))
+        self.image.set_colorkey((0, 0, 0))
+
+    def set_player(self, player):
+        self.player = player
+
+    def update(self):
+        self.rect.x += self.speed
+        if self.speed > 0 and self.rect.left > SCREEN_WIDTH:
+            self.reset_position()
+        elif self.speed < 0 and self.rect.right < 0:
+            self.reset_position()
+
+        # Check for collision between player and logs
+        if self.player is not None:  # Check if the player is set
+            player_on_log = pygame.sprite.collide_mask(self.player, self)
+            if player_on_log:
+                self.player.move(self.speed, 0)
+
+    def reset_position(self):
+        if self.speed > 0:
+            self.rect.right = 0
+        else:
+            self.rect.left = SCREEN_WIDTH
+
+    def carry_player(self, player):
+       player.frog_position[0] += self.speed  # Adjust the frog's position based on the log's speed
+       player.rect.topleft = player.frog_position
+
+    def get_mask(self):
+        return pygame.mask.from_surface(self.image)
+    
+log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+
+player = Player(Player.frog_position[0], Player.frog_position[1])
+log1.set_player(player)
+log2.set_player(player)
+log3.set_player(player)
 
 
 class Health_bar:
@@ -377,16 +441,18 @@ lake_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+logs_group = pygame.sprite.LayeredUpdates()
+logs_group.add(log1, log2, log3)
+
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites, player_sprites, car_sprites)
+all_sprites.add(background_sprites, player_sprites, car_sprites, log1, log2, log3)
 
 
 scroll_x = 0
 scroll_y = 0
-current_background = road_bg
   
 
-#main loop
+#main Game loop
 running = True
 while running:
     for event in pygame.event.get():
@@ -440,7 +506,7 @@ while running:
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-        all_sprites.add(background_sprites, player_sprites, alligators_sprites)
+        all_sprites.add(background_sprites, player_sprites, alligators_sprites, logs_group)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -455,11 +521,8 @@ while running:
             alligator = Gator(200, 400)
             alligators.append(alligator)
             all_sprites.add(alligator)
-
-
     
     alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
-  
    
     player_colliding_with_alligator = False
 
@@ -475,18 +538,23 @@ while running:
 
     if len(alligators_hit) == 0:
         player_colliding_with_alligator = False
+    
+    # Check for collision between player and logs
+    for log in logs_group:
+        if pygame.sprite.collide_mask(player, log):
+            log.carry_player(player)
 
     
     screen.blit(current_background, (scroll_x, scroll_y))
    
     lake_sprites.draw(screen)
-
     player_sprites.draw(screen)
-
+    logs_group.draw(screen)
     all_sprites.update()
     all_sprites.draw(screen)
     health_bar.update()
     player.update()
+    logs_group.update()
 
     pygame.display.flip()
     clock.tick(60)
