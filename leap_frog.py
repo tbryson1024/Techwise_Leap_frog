@@ -312,6 +312,71 @@ class Gator(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
+import pygame
+import random
+
+class LilyPad(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y):
+        super().__init__()
+        self.image = pygame.image.load('Images/LilyPad.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (80, 80))
+        self.rect = self.image.get_rect()
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+        self.animation_timer = 0
+        self.animation_speed = 5
+
+    def update(self):
+        self.animation_timer += 1
+        if self.animation_timer > self.animation_speed:
+            self.animation_timer = 0
+            self.rect.y += random.uniform(-1, 1)
+
+def game():
+    # Initialize Pygame
+    pygame.init()
+
+    # Set up the display
+    screen_width = 800
+    screen_height = 600
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Frogger Game")
+
+    # Create sprite group
+    all_sprites = pygame.sprite.Group()
+    x_position = 200  # Replace with desired x-coordinate
+    y_position = 300  # Replace with desired y-coordinate
+    lilypad = LilyPad(x_position, y_position)
+    all_sprites.add(lilypad)
+
+    running = True
+    clock = pygame.time.Clock()  # Add a clock to control frame rate
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # Update sprites
+        all_sprites.update()
+
+        # Clear the screen
+        screen.fill((0, 0, 0))
+
+        # Draw sprites
+        all_sprites.draw(screen)
+
+        # Update the display
+        pygame.display.flip()
+
+        clock.tick(60)  # Limit the frame rate to 60 FPS
+
+    pygame.quit()
+
+# Call the game function to start the game
+if __name__ == "__main__":
+    game()
+
 
 class LilyPad(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
