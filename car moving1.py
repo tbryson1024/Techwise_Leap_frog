@@ -1,5 +1,5 @@
 import pygame
-from pygame import Surface, mixer
+from pygame import Surface, mixer, sprite
 import sys
 import random
 import menu
@@ -82,6 +82,8 @@ class Player(pygame.sprite.Sprite):
 
         self.frog_sprites = [self.sprites_right,self.sprites_left,self.sprites_up,self.sprites_down]
 
+        self.on_log = False
+        
         for direction_sprites in self.frog_sprites:
             for i in range(len(direction_sprites)):
                 direction_sprites[i].set_colorkey((0, 0, 0))
@@ -138,7 +140,7 @@ class Player(pygame.sprite.Sprite):
 
         # Check if the player is on a log
         on_log = False
-        for log in logs_group:
+        for log in log1, log2, log3:
             if pygame.sprite.collide_mask(self, log):
                 on_log = True
                 if not (keys[pygame.K_LEFT] or keys[pygame.K_RIGHT] or keys[pygame.K_UP] or keys[pygame.K_DOWN]):
@@ -155,7 +157,7 @@ class Player(pygame.sprite.Sprite):
             elif self.direction == "down":
                 self.image = self.sprites_down[int(self.current_sprite)]
 
-        self.rect.topleft = self.frog_position
+       # Not needed as is - self.rect.topleft = self.frog_position
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
@@ -341,11 +343,11 @@ class Log(pygame.sprite.Sprite):
         elif self.speed < 0 and self.rect.right < 0:
             self.reset_position()
 
-        # Check for collision between player and logs
+        """ # Check for collision between player and logs
         if self.player is not None:  # Check if the player is set
             player_on_log = pygame.sprite.collide_mask(self.player, self)
             if player_on_log:
-                self.player.move(self.speed, 0)
+                self.player.move(self.speed, 0) """
 
     def reset_position(self):
         if self.speed > 0:
@@ -424,32 +426,27 @@ class Health_bar:
  # Initialize objects
 new_level = New_level(0, 0)
 lake = Lake(-2, 255)
-player = Player(Player.frog_position[0], Player.frog_position[1])
+
 alligator = Gator(100, 500)
 
 health_bar = Health_bar(player, screen)
 
-# Create sprite groups with ordem of apperance 
-background_sprites = pygame.sprite.LayeredUpdates()
-background_sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
+# Create sprite groups with order of apperance 
+sprites = pygame.sprite.Group() #Create Sprites Group
 
-player_sprites = pygame.sprite.LayeredUpdates()
-player_sprites.add(player,background_sprites)  # Player sprites should be drawn on top of background
+background_sprites = pygame.sprite.LayeredUpdates()
+sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
+
+alligators_group = pygame.sprite.Group()
 
 car_sprites = pygame.sprite.LayeredUpdates()
 car_sprites.add(cars)  # Cars should be drawn on top of player and background
 
 lake_sprites = pygame.sprite.LayeredUpdates()
+sprites.add(lake_sprites)
 
-alligators_sprites = pygame.sprite.LayeredUpdates()
-alligators_sprites.add(alligator)
-
-logs_group = pygame.sprite.LayeredUpdates()
-logs_group.add(log1, log2, log3)
-
-all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites, player_sprites, car_sprites, log1, log2, log3)
-
+player = Player(Player.frog_position[0], Player.frog_position[1])
+sprites.add(player) #Add player last to keep on top
 
 scroll_x = 0
 scroll_y = 0
@@ -509,7 +506,8 @@ while running:
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-        all_sprites.add(background_sprites, player_sprites, alligators_sprites, logs_group)
+        sprites.add(background_sprites, alligator, log1, log2, log3)
+        sprites.add(player)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -523,9 +521,9 @@ while running:
         for alligator in range(num_alligators):
             alligator = Gator(200, 400)
             alligators.append(alligator)
-            all_sprites.add(alligator)
+            sprites.add(alligator)
     
-    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+    alligators_hit = pygame.sprite.spritecollide(player, alligators_group, False, pygame.sprite.collide_mask)
    
     player_colliding_with_alligator = False
 
@@ -543,21 +541,17 @@ while running:
         player_colliding_with_alligator = False
     
     # Check for collision between player and logs
-    for log in logs_group:
-        if pygame.sprite.collide_mask(player, log):
+    for log in log1, log2, log3:
+        if pygame.sprite.collide_mask(log, player):
             log.carry_player(player)
 
     
     screen.blit(current_background, (scroll_x, scroll_y))
    
     lake_sprites.draw(screen)
-    player_sprites.draw(screen)
-    logs_group.draw(screen)
-    all_sprites.update()
-    all_sprites.draw(screen)
+    sprites.update()
+    sprites.draw(screen)
     health_bar.update()
-    player.update()
-    logs_group.update()
-
+    
     pygame.display.flip()
     clock.tick(60)
