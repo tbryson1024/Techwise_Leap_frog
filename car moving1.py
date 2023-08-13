@@ -2,6 +2,9 @@ import pygame
 from pygame import Surface, mixer
 import sys
 import random
+import menu
+
+menu.main()
 
 pygame.init()
 pygame.mixer.init(devicename='directsound')
