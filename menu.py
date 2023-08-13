@@ -1,6 +1,5 @@
 import pygame
 from pygame import mixer
-import subprocess #allows you to run other Python scripts. Needed to link to game when you click start button.
 pygame.init()
 pygame.mixer.init()
 
@@ -71,7 +70,8 @@ def handle_button_click(mouse_pos):
         click_Sound.play()
         stop_Music()
 
-        subprocess.Popen(["python3", "car moving1.py"])
+        # START GAME HERE
+        return 1
 
         # switch to the gameplay screen
         run_gameplay_screen()
@@ -131,7 +131,9 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # Left mouse button
-                    handle_button_click(pygame.mouse.get_pos())
+                    user_choice = handle_button_click(pygame.mouse.get_pos())
+                    if(user_choice == 1):
+                        return
         draw_menu() #Puts background and text together
 
         pygame.display.flip()  # Update the display
