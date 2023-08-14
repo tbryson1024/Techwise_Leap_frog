@@ -24,8 +24,16 @@ BG_SWAMP_SIZE = 1080
 
 
 #mixer.music.load("Images/Swamps Nature.wav")
-mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
-mixer.music.play(-1)  # play non-stop
+#mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
+#mixer.music.play(-1)  # play non-stop
+
+
+road_sound = mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
+mixer.music.play()
+#swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
+#dead_sound = mixer.music.load("Images/mixkit-futuristic-electronic-engine-fail-2941.wav")
+
+#mixer.music.play(1)  # play non-stop
 
 
 class Player(pygame.sprite.Sprite):
@@ -224,7 +232,7 @@ class New_level(pygame.sprite.Sprite): # snippet of image on top of screen takin
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-      
+
        
     def update(self):
         screen.blit(self.image, self.rect)
@@ -423,6 +431,9 @@ while running:
 
     if player.frog_position[0] >= BG_ROAD_SIZE:
        current_background = swamp_bg
+       
+
+    
 
 
     # Check for collision between player and cars
@@ -435,6 +446,8 @@ while running:
                     player.health = 100
                 elif player.health == 0 and player.lives == 0:
                     player.alive = False
+
+        
 
     
       # Check for collision between player and new_level
@@ -449,6 +462,11 @@ while running:
         current_background = pygame.image.load('Images/bg1.png').convert()
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
         player.reset_player()
+        
+
+        mixer.music.stop()
+        swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
+        mixer.music.play()
 
         alligators = []
         num_alligators = 4
