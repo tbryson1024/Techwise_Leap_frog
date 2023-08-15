@@ -585,14 +585,14 @@ while running:
 
 
     #check for collision between player and caves
-    if pygame.sprite.collide_mask(player, cave1): 
+    if pygame.sprite.collide_mask(player, cave1): # colliding with logs for test purposes, supposed to be cave1
 #       sprites.add(cave_frog1)
        all_sprites.add(cave_frog1)
        player.reset_pos()
        cave_frog1.image.set_colorkey((0, 0, 0))  
   
 
-    elif pygame.sprite.collide_mask(player, cave2): 
+    elif pygame.sprite.collide_mask(player, cave2): #colliding with logs for test purposes, it is supposed to be cave2
 #        sprites.add(cave_frog2)
         all_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
