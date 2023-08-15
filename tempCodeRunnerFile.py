@@ -28,18 +28,8 @@ BG_SWAMP_SIZE = 1080
 current_background = pygame.image.load('Images/road2.jpg').convert()
 current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-#mixer.music.load("Images/Swamps Nature.wav")
-#mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
-#mixer.music.play(-1)  # play non-stop
-
-
-road_sound = mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
-mixer.music.play()
-#swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
-#dead_sound = mixer.music.load("Images/mixkit-futuristic-electronic-engine-fail-2941.wav")
-
-#mixer.music.play(1)  # play non-stop
-
+mixer.music.load("Images/Swamps Nature.wav")
+mixer.music.play(-1)  # play non-stop
 
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
@@ -224,7 +214,7 @@ class New_level(pygame.sprite.Sprite): # snippet of image on top of screen takin
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-
+      
        
 #    def update(self):
 #        screen.blit(self.image, self.rect)
@@ -376,7 +366,7 @@ class Health_bar:
         if not self.player.alive:
             self.screen.fill((0, 0, 0))
             #game_over_sound = mixer.Sound("game over.wav")
-            #game_over_sound.play()
+           # game_over_sound.play()
             #game_over = pygame.image.load('game over.jpg').convert()
             #game_over_rect = game_over.get_rect()
             #game_over_rect.center = (500, 300)
@@ -524,7 +514,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-       
+
 
     player.update()
 
@@ -538,8 +528,6 @@ while running:
                     player.health = 100
                 elif player.health == 0 and player.lives == 0:
                     player.alive = False
-
-        
 
     
       # Check for collision between player and new_level
@@ -561,7 +549,7 @@ while running:
             car.kill() # remove cars
         current_background = pygame.image.load('Images/bg1.png').convert()
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
-
+        
         alligators = []
         num_alligators = 4
 
@@ -597,14 +585,14 @@ while running:
 
 
     #check for collision between player and caves
-    if pygame.sprite.collide_mask(player, cave1): 
+    if pygame.sprite.collide_mask(player, cave1): # colliding with logs for test purposes, supposed to be cave1
 #       sprites.add(cave_frog1)
        all_sprites.add(cave_frog1)
        player.reset_pos()
        cave_frog1.image.set_colorkey((0, 0, 0))  
   
 
-    elif pygame.sprite.collide_mask(player, cave2): 
+    elif pygame.sprite.collide_mask(player, cave2): #colliding with logs for test purposes, it is supposed to be cave2
 #        sprites.add(cave_frog2)
         all_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
