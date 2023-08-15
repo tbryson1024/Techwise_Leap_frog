@@ -301,9 +301,6 @@ class Gator(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
-import pygame
-import random
-
 class LilyPad(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         super().__init__()
@@ -321,50 +318,6 @@ class LilyPad(pygame.sprite.Sprite):
             self.animation_timer = 0
             self.rect.y += random.uniform(-1, 1)
 
-def game():
-    # Initialize Pygame
-    pygame.init()
-
-    # Set up the display
-    screen_width = 800
-    screen_height = 600
-    screen = pygame.display.set_mode((screen_width, screen_height))
-    pygame.display.set_caption("Frogger Game")
-
-    # Create sprite group
-    all_sprites = pygame.sprite.Group()
-    x_position = 200  # Replace with desired x-coordinate
-    y_position = 300  # Replace with desired y-coordinate
-    lilypad = LilyPad(x_position, y_position)
-    all_sprites.add(lilypad)
-
-    running = True
-    clock = pygame.time.Clock()  # Add a clock to control frame rate
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        # Update sprites
-        all_sprites.update()
-
-        # Clear the screen
-        screen.fill((0, 0, 0))
-
-        # Draw sprites
-        all_sprites.draw(screen)
-
-        # Update the display
-        pygame.display.flip()
-
-        clock.tick(60)  # Limit the frame rate to 60 FPS
-
-    pygame.quit()
-
-# Call the game function to start the game
-if __name__ == "__main__":
-    game()
 
 
 
@@ -424,9 +377,8 @@ new_level = New_level(0, 0)
 lake = Lake(-2, 255)
 player = Player(Player.frog_position[0], Player.frog_position[1])
 alligator = Gator(100, 500)
-
 health_bar = Health_bar(player, screen)
-
+lilypads=LilyPad (100,200)
 # Create sprite groups with ordem of apperance 
 background_sprites = pygame.sprite.LayeredUpdates()
 background_sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
@@ -505,7 +457,8 @@ while running:
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-        all_sprites.add(background_sprites, player_sprites, alligators_sprites)
+        lilypads=LilyPad(300,500) #creating lilypads in it's positions
+        all_sprites.add(background_sprites, player_sprites, alligators_sprites,lilypads)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -540,6 +493,18 @@ while running:
 
     if len(alligators_hit) == 0:
         player_colliding_with_alligator = False
+
+
+
+
+
+    #lilypads = []
+    #num_lilypads = 4
+
+    #for lilypad in range(num_lilypads):
+        #lilypads = LilyPad(200, 400)
+        #lilypads.append(lilypads)
+        #all_sprites.add(lilypads)
 
     
     screen.blit(current_background, (scroll_x, scroll_y))
