@@ -510,8 +510,11 @@ lake_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+log_sprites = pygame.sprite.LayeredUpdates()
+log_sprites.add(log1, log2, log3)
+
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites,car_sprites,player_sprites)
+all_sprites.add(background_sprites,car_sprites,log_sprites, player_sprites)
 
 
 scroll_x = 0
