@@ -311,11 +311,10 @@ class Log(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-        self.speed = random.randrange(1,4)  
+        self.speed = speed  
         self.player = None  # Player attribute
         self.image = pygame.transform.scale(self.image, (150, 75))
         self.image.set_colorkey((0, 0, 0))
-
     def set_player(self, player):
         self.player = player
 
@@ -340,9 +339,6 @@ class Log(pygame.sprite.Sprite):
         return pygame.mask.from_surface(self.image)
     
 player = Player(Player.frog_position[0], Player.frog_position[1])
-""" log1.set_player(player)
-log2.set_player(player)
-log3.set_player(player) """
 
 
 class Health_bar:
@@ -353,8 +349,6 @@ class Health_bar:
         self.health_bar_height = 20
         self.health_bar_x = 10  # horizontal position of the health bar
         self.health_bar_y = 10  # vertical position of the health bar
-
-
 
     def draw_health_bars(self):
         pygame.draw.rect(self.screen, (255, 0, 0),
@@ -466,42 +460,31 @@ cave_frog3= CaveFrog(345,180)
 
 
 # Create sprite groups with order of apperance 
-#sprites = pygame.sprite.Group() #Create Sprites Group
-
-#background_sprites = pygame.sprite.LayeredUpdates()
-#sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
-
-#alligators_group = pygame.sprite.Group()
-
-#car_sprites = pygame.sprite.LayeredUpdates()
-#car_sprites.add(cars)  # Cars should be drawn on top of player and background
-
-#lake_sprites = pygame.sprite.LayeredUpdates()
-#sprites.add(lake_sprites)
-
-#player = Player(Player.frog_position[0], Player.frog_position[1])
-#sprites.add(player) #Add player last to keep on top
-
-#all_sprites = pygame.sprite.LayeredUpdates()
-#all_sprites.add(player, alligators_group, cave1,cave2,cave3)
-
 background_sprites = pygame.sprite.LayeredUpdates()
 background_sprites.add(background_sprites, cars)  # Background sprites should be drawn first
 
 player_sprites = pygame.sprite.LayeredUpdates()
 player_sprites.add(player) 
 
-
 car_sprites = pygame.sprite.LayeredUpdates()
 car_sprites.add(cars)  # Cars should be drawn on top of player and background
 
 lake_sprites = pygame.sprite.LayeredUpdates()
-log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log1 = Log("Images/log.png", 100, 350, -5)
+log2 = Log("Images/log.png", 300, 350, -5)
+log3 = Log("Images/log.png", 100, 400, 5)
+log4 = Log("Images/log.png", 300, 400, 5)
+log5 = Log("Images/log.png", 200, 450, -5)
+log6 = Log("Images/log.png", 100, 450, -5)
+log7 = Log("Images/log.png", 300, 500, 5)
+log8 = Log("Images/log.png", 100, 500, 5)
+log9 = Log("Images/log.png", 400, 550, -5)
+log10 = Log("Images/log.png", 100, 550, -5)
+log11 = Log("Images/log.png", 500, 600, 5)
+log12 = Log("Images/log.png", 100, 600, 5)
 
 log_sprites = pygame.sprite.LayeredUpdates()
-log_sprites.add(log1, log2, log3)
+log_sprites.add(log1, log2, log3, log4, log5, log6, log7, log8, log9, log10, log11, log12)
 
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
@@ -584,32 +567,29 @@ while running:
 
 
     # Check for collision between player and logs
-    for log in log1, log2, log3:
+    for log in log_sprites:
         if pygame.sprite.collide_mask(log, player):
             log.carry_player(player)
 
 
 
-    #check for collision between player and caves
+    # Check for collision between player and caves
     if pygame.sprite.collide_mask(player, cave1): 
-#       sprites.add(cave_frog1)
        all_sprites.add(cave_frog1)
        player.reset_pos()
        cave_frog1.image.set_colorkey((0, 0, 0))  
   
 
     elif pygame.sprite.collide_mask(player, cave2): 
-#        sprites.add(cave_frog2)
         all_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
         cave_frog2.image.set_colorkey((0, 0, 0)) 
 
 
     elif pygame.sprite.collide_mask(player, cave3):
-#       sprites.add(cave_frog3)
-       all_sprites.add(cave_frog3)
-       player.reset_pos()  # Reset the player's position
-       cave_frog3.image.set_colorkey((0, 0, 0)) 
+        all_sprites.add(cave_frog3)
+        player.reset_pos()  # Reset the player's position
+        cave_frog3.image.set_colorkey((0, 0, 0)) 
 
 
     screen.blit(current_background, (scroll_x, scroll_y))
