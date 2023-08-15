@@ -24,7 +24,7 @@ def stop_Music():
 # Function to draw the menu with the buttons
 def draw_menu():
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-    text = font.render("Frogger", True, BLACK)  # Black text
+    text = font.render("Leap Frog", True, BLACK)  # Black text
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
 
     # Draw the start button
