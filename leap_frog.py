@@ -507,7 +507,7 @@ alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites,car_sprites, log_sprites, player_sprites)
+all_sprites.add(background_sprites,car_sprites, player_sprites)
 
 
 scroll_x = 0
@@ -541,16 +541,14 @@ while running:
       # Check for collision between player and new_level
     if player.rect.colliderect(new_level.rect):
         player.reset_pos()
-        #all_sprites.update()
+        all_sprites.update()
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-#        sprites.add(background_sprites, alligator, log1, log2, log3)
-        all_sprites.add(background_sprites, alligator, log1, log2, log3)
-#        sprites.add(player)
-        all_sprites.add(player)
+        all_sprites.add(background_sprites, alligator, log_sprites)
+        #all_sprites.add(player_sprites)
 
-        all_sprites.add(player, alligators_sprites, cave1,cave2,cave3)
+        all_sprites.add(alligators_sprites, cave1,cave2,cave3)
 
 
         for car in cars.sprites():
@@ -617,13 +615,9 @@ while running:
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
-    
-
     all_sprites.draw(screen)
-#    sprites.update()
+    player_sprites.draw(screen)
     all_sprites.update()
-#    sprites.draw(screen)
-    all_sprites.draw(screen)
 
     health_bar.update()
 
