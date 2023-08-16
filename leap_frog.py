@@ -28,8 +28,18 @@ BG_SWAMP_SIZE = 1080
 current_background = pygame.image.load('Images/road2.jpg').convert()
 current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-mixer.music.load("Images/Swamps Nature.wav")
-mixer.music.play(-1)  # play non-stop
+#mixer.music.load("Images/Swamps Nature.wav")
+#mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
+#mixer.music.play(-1)  # play non-stop
+
+
+road_sound = mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
+mixer.music.play()
+#swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
+#dead_sound = mixer.music.load("Images/mixkit-futuristic-electronic-engine-fail-2941.wav")
+
+#mixer.music.play(1)  # play non-stop
+
 
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
@@ -214,7 +224,7 @@ class New_level(pygame.sprite.Sprite): # snippet of image on top of screen takin
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-      
+
        
 #    def update(self):
 #        screen.blit(self.image, self.rect)
@@ -316,12 +326,6 @@ class Log(pygame.sprite.Sprite):
         elif self.speed < 0 and self.rect.right < 0:
             self.reset_position()
 
-        """ # Check for collision between player and logs
-        if self.player is not None:  # Check if the player is set
-            player_on_log = pygame.sprite.collide_mask(self.player, self)
-            if player_on_log:
-                self.player.move(self.speed, 0) """
-
     def reset_position(self):
         if self.speed > 0:
             self.rect.right = 0
@@ -335,14 +339,10 @@ class Log(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
     
-log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-
 player = Player(Player.frog_position[0], Player.frog_position[1])
-log1.set_player(player)
+""" log1.set_player(player)
 log2.set_player(player)
-log3.set_player(player)
+log3.set_player(player) """
 
 
 class Health_bar:
@@ -366,7 +366,7 @@ class Health_bar:
         if not self.player.alive:
             self.screen.fill((0, 0, 0))
             #game_over_sound = mixer.Sound("game over.wav")
-           # game_over_sound.play()
+            #game_over_sound.play()
             #game_over = pygame.image.load('game over.jpg').convert()
             #game_over_rect = game_over.get_rect()
             #game_over_rect.center = (500, 300)
@@ -496,12 +496,18 @@ car_sprites = pygame.sprite.LayeredUpdates()
 car_sprites.add(cars)  # Cars should be drawn on top of player and background
 
 lake_sprites = pygame.sprite.LayeredUpdates()
+log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+
+log_sprites = pygame.sprite.LayeredUpdates()
+log_sprites.add(log1, log2, log3)
 
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites,car_sprites,player_sprites)
+all_sprites.add(background_sprites,car_sprites, player_sprites)
 
 
 scroll_x = 0
@@ -514,7 +520,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+       
 
     player.update()
 
@@ -529,27 +535,27 @@ while running:
                 elif player.health == 0 and player.lives == 0:
                     player.alive = False
 
+        
+
     
       # Check for collision between player and new_level
     if player.rect.colliderect(new_level.rect):
         player.reset_pos()
-        #all_sprites.update()
+        all_sprites.update()
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-#        sprites.add(background_sprites, alligator, log1, log2, log3)
-        all_sprites.add(background_sprites, alligator, log1, log2, log3)
-#        sprites.add(player)
-        all_sprites.add(player)
+        all_sprites.add(background_sprites, alligator, log_sprites)
+        #all_sprites.add(player_sprites)
 
-        all_sprites.add(player, alligators_sprites, cave1,cave2,cave3)
+        all_sprites.add(alligators_sprites, cave1,cave2,cave3)
 
 
         for car in cars.sprites():
             car.kill() # remove cars
         current_background = pygame.image.load('Images/bg1.png').convert()
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        
+
         alligators = []
         num_alligators = 4
 
@@ -585,14 +591,14 @@ while running:
 
 
     #check for collision between player and caves
-    if pygame.sprite.collide_mask(player, cave1): # colliding with logs for test purposes, supposed to be cave1
+    if pygame.sprite.collide_mask(player, cave1): 
 #       sprites.add(cave_frog1)
        all_sprites.add(cave_frog1)
        player.reset_pos()
        cave_frog1.image.set_colorkey((0, 0, 0))  
   
 
-    elif pygame.sprite.collide_mask(player, cave2): #colliding with logs for test purposes, it is supposed to be cave2
+    elif pygame.sprite.collide_mask(player, cave2): 
 #        sprites.add(cave_frog2)
         all_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
@@ -609,13 +615,9 @@ while running:
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
-    
-
     all_sprites.draw(screen)
-#    sprites.update()
+    player_sprites.draw(screen)
     all_sprites.update()
-#    sprites.draw(screen)
-    all_sprites.draw(screen)
 
     health_bar.update()
 
