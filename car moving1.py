@@ -398,32 +398,15 @@ class Health_bar:
 
 
 class Caves(pygame.sprite.Sprite):
-    def __init__(self, pos_x, pos_y):
+    def __init__(self, pos_x, pos_y, image_path,scale_x, scale_y):
         super().__init__()
 
-        # Load the initial cave image
-        initial_cave_image = pygame.image.load('Images/minicave.png').convert()
-        initial_cave_image.set_colorkey((0, 0, 0)) 
-        initial_cave_image = pygame.transform.scale(initial_cave_image, (410, 410))  
-
-        self.sprites = [initial_cave_image] 
-        self.num_min_caves = 3  # Number of additional cave images
-
-        # Create more cave images based on the first one
-        for _ in range(1, self.num_min_caves):
-            new_cave_image = pygame.image.load('Images/minicave.png').convert()
-            new_cave_image.set_colorkey((0, 0, 0))
-            new_cave_image = pygame.transform.scale(new_cave_image, (410, 410))
-
-            self.sprites.append(new_cave_image)
-
-        self.current_sprite = 0
-        self.image = self.sprites[self.current_sprite]
-        self.image = new_cave_image
+        self.image = pygame.image.load(image_path).convert()
+        self.image.set_colorkey((0, 0, 0))
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
-
+        self.image = pygame.transform.scale(self.image, (scale_x, scale_y))
 
     def update(self):
         screen.blit(self.image, self.rect)
@@ -455,13 +438,16 @@ alligator = Gator(100, 500)
 
 health_bar = Health_bar(player, screen)
 
-cave1 = Caves(-70,-8)
-cave2 = Caves(50,-8)
-cave3 = Caves(170, -8)
+
+cave1 = Caves(-90, -20, 'Images/minicave.png',420,420)
+cave2 = Caves(50, -20, 'Images/minicave.png',420,420)
+cave3 = Caves(170, -20, 'Images/minicave.png',420,420)
+cave4 = Caves(300, -55, 'Images/main cave.png',600, 320) 
 
 cave_frog1= CaveFrog(103,180)
 cave_frog2 = CaveFrog(217,180)
 cave_frog3= CaveFrog(345,180)
+cave_frog4 = CaveFrog(200,180)
 
 
 
@@ -538,11 +524,11 @@ while running:
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
 #        sprites.add(background_sprites, alligator, log1, log2, log3)
-        all_sprites.add(background_sprites, alligator, log1, log2, log3)
+        all_sprites.add(background_sprites, alligator, log1, log2, log3, player)
 #        sprites.add(player)
-        all_sprites.add(player)
+#        all_sprites.add(player)
 
-        all_sprites.add(player, alligators_sprites, cave1,cave2,cave3)
+        all_sprites.add(player, alligators_sprites,cave2, cave4,cave1,cave3)
 
 
         for car in cars.sprites():
@@ -605,20 +591,25 @@ while running:
        player.reset_pos()  # Reset the player's position
        cave_frog3.image.set_colorkey((0, 0, 0)) 
 
+#    elif pygame.sprite.collide_mask(player, cave4):
+#       all_sprites.add(cave_frog4)
+#      player.reset_pos()  # Reset the player's position
+#       cave_frog4.image.set_colorkey((0, 0, 0)) 
 
+    
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
     
 
     all_sprites.draw(screen)
-#    sprites.update()
+
     all_sprites.update()
-#    sprites.draw(screen)
+
     all_sprites.draw(screen)
 
     health_bar.update()
 
-
+ #   cave_sprites.update()
     pygame.display.flip()
     clock.tick(60)
