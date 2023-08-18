@@ -7,13 +7,10 @@ pygame.mixer.music.load("sounds/birds.mp3")
 pygame.mixer.music.play()
 pygame.mixer.music.set_volume(0.5)
 
-<<<<<<< HEAD
-screen_width = 800
-screen_height = 600
-=======
+
 screen_width = 1080
 screen_height = 720
->>>>>>> lilypads
+
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Menu Screen")
 
@@ -78,7 +75,7 @@ def handle_button_click(mouse_pos):
 
         # START GAME HERE
         return 1
-    
+
     is_mouse_over_quit_button_x = quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width
     is_mouse_over_quit_button_y = quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height
 
@@ -99,7 +96,7 @@ def run_gameplay_screen():
     return running
 
 def background_image():
-    
+
     # Load the background image
     background_image = pygame.image.load('Images/menu-background2.jpg') 
 
@@ -144,7 +141,6 @@ def main():
 
     pygame.quit()
 
-    
 
 if __name__ == "__main__":
     main()
