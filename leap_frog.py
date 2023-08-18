@@ -579,7 +579,14 @@ while running:
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
-        lilypads = LilyPad(300,500) #creating lilypads in it's positions
+        
+        lilypad1 = LilyPad(200,500) #creating lilypads in it's positions
+        lilypad2 = LilyPad(500, 350)
+        lilypad3 = LilyPad(700, 500)
+
+        lilypad_sprites = pygame.sprite.LayeredUpdates()
+        lilypad_sprites.add(lilypad1, lilypad2, lilypad3)
+
         all_sprites.update()
         new_level.kill()
 
@@ -596,7 +603,7 @@ while running:
         cave_frog4 = CaveFrog(600,150)
         cave_frog_sprites = pygame.sprite.LayeredUpdates()
 
-        all_sprites.add(alligators_sprites, lilypads, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
+        all_sprites.add(alligators_sprites, lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -637,15 +644,6 @@ while running:
         for log in log_sprites:
             if pygame.sprite.collide_mask(log, player):
                 log.carry_player(player)
-
-
-    """  lilypads = []
-    num_lilypads = 4
-
-    for lilypad in range(num_lilypads):
-        lilypad = LilyPad(200, 400)
-        lilypads.append(lilypad)
-        all_sprites.add(lilypads) """
 
        #check for collision between player and caves
     if current_level == 2 and pygame.sprite.collide_mask(player, cave1) :
