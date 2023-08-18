@@ -1,9 +1,13 @@
 import pygame
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
 from pygame import Surface, mixer, sprite
 =======
 from pygame import Surface, mixer
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
+=======
+from pygame import Surface, mixer, sprite
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 import sys
 import random
 import menu
@@ -98,10 +102,23 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = pos_y
         self.direction = "up"
 
+<<<<<<< HEAD:leap_frog.py
     def move(self, dx, dy):
         self.frog_position[0] += dx  # Update horizontal coordinate
         self.frog_position[1] += dy  # Update vertical coordinate
         self.rect.topleft = self.frog_position
+=======
+        self.frog_sprites = [self.sprites_right,self.sprites_left,self.sprites_up,self.sprites_down]
+
+        self.on_log = False
+        
+        for direction_sprites in self.frog_sprites:
+            for i in range(len(direction_sprites)):
+                direction_sprites[i].set_colorkey((0, 0, 0))
+                direction_sprites[i] = pygame.transform.scale(direction_sprites[i], (50, 50))
+
+      
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 
     def move_right(self):
         if self.rect.x < SCREEN_WIDTH - self.rect.width:
@@ -175,7 +192,7 @@ class Player(pygame.sprite.Sprite):
 =======
         # Check if the player is on a log
         on_log = False
-        for log in logs_group:
+        for log in log1, log2, log3:
             if pygame.sprite.collide_mask(self, log):
                 on_log = True
                 if not (keys[pygame.K_LEFT] or keys[pygame.K_RIGHT] or keys[pygame.K_UP] or keys[pygame.K_DOWN]):
@@ -192,8 +209,12 @@ class Player(pygame.sprite.Sprite):
             elif self.direction == "down":
                 self.image = self.sprites_down[int(self.current_sprite)]
 
+<<<<<<< HEAD:leap_frog.py
 >>>>>>> e62f4f0 (Saving changes to logs3):car moving1.py
         self.rect.topleft = self.frog_position
+=======
+       # Not needed as is - self.rect.topleft = self.frog_position
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
@@ -401,11 +422,11 @@ class Log(pygame.sprite.Sprite):
         elif self.speed < 0 and self.rect.right < 0:
             self.reset_position()
 
-        # Check for collision between player and logs
+        """ # Check for collision between player and logs
         if self.player is not None:  # Check if the player is set
             player_on_log = pygame.sprite.collide_mask(self.player, self)
             if player_on_log:
-                self.player.move(self.speed, 0)
+                self.player.move(self.speed, 0) """
 
     def reset_position(self):
         if self.speed > 0:
@@ -587,6 +608,7 @@ lake = Lake(-2, 255)
 alligator = Gator(100, 500)
 health_bar = Health_bar(player, screen)
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
 
 <<<<<<< HEAD
 =======
@@ -603,10 +625,14 @@ cave_frog3= CaveFrog(345,180)
 # Create sprite groups with order of apperance 
 >>>>>>> 675536f (Adding more logs)
 =======
+=======
+<<<<<<< HEAD
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 lilypads=LilyPad (100,200)
 # Create sprite groups with ordem of apperance 
 >>>>>>> a875787 (saving changes):car moving1.py
 background_sprites = pygame.sprite.LayeredUpdates()
+<<<<<<< HEAD:leap_frog.py
 background_sprites.add(background_sprites, cars)
 
 player_sprites = pygame.sprite.LayeredUpdates()
@@ -615,11 +641,25 @@ player_sprites.add(player)
 =======
 player_sprites.add(player) 
 >>>>>>> 675536f (Adding more logs)
+=======
+background_sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
+=======
+
+# Create sprite groups with order of apperance 
+sprites = pygame.sprite.Group() #Create Sprites Group
+>>>>>>> c3fde22 (Removed logs from first screen.)
+
+background_sprites = pygame.sprite.LayeredUpdates()
+sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
+
+alligators_group = pygame.sprite.Group()
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 
 car_sprites = pygame.sprite.LayeredUpdates()
 car_sprites.add(cars)
 
 lake_sprites = pygame.sprite.LayeredUpdates()
+<<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD
 
 lilypad_sprites = pygame.sprite.LayeredUpdates()
@@ -678,6 +718,12 @@ cave_frog2 = CaveFrog(217,180)
 cave_frog3= CaveFrog(345,180)
 cave_frog4 = CaveFrog(600,150)
 cave_frog_sprites = pygame.sprite.LayeredUpdates()
+=======
+sprites.add(lake_sprites)
+
+player = Player(Player.frog_position[0], Player.frog_position[1])
+sprites.add(player) #Add player last to keep on top
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 
 scroll_x = 0
 scroll_y = 0
@@ -777,12 +823,20 @@ while running:
 >>>>>>> a875787 (saving changes):car moving1.py
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
         lilypads=LilyPad(300,500) #creating lilypads in it's positions
         all_sprites.add(background_sprites, player_sprites, alligators_sprites,lilypads)
 =======
         all_sprites.add(background_sprites, player_sprites, alligators_sprites, logs_group)
 >>>>>>> 5bf9194 (Saving changes, frog now moves with log)
+<<<<<<< HEAD:leap_frog.py
 >>>>>>> a8b0e91 (Saving changes, frog now moves with log):car moving1.py
+=======
+=======
+        sprites.add(background_sprites, alligator, log1, log2, log3)
+        sprites.add(player)
+>>>>>>> c3fde22 (Removed logs from first screen.)
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -801,14 +855,18 @@ while running:
         for alligator in range(num_alligators):
             alligator = Gator(200, 400)
             alligators.append(alligator)
+<<<<<<< HEAD:leap_frog.py
 
             all_sprites.add(alligator)
 <<<<<<< HEAD:leap_frog.py
 
     alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
 =======
+=======
+            sprites.add(alligator)
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
     
-    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+    alligators_hit = pygame.sprite.spritecollide(player, alligators_group, False, pygame.sprite.collide_mask)
    
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
     player_colliding_with_alligator = False
@@ -826,8 +884,8 @@ while running:
         player_colliding_with_alligator = False
     
     # Check for collision between player and logs
-    for log in logs_group:
-        if pygame.sprite.collide_mask(player, log):
+    for log in log1, log2, log3:
+        if pygame.sprite.collide_mask(log, player):
             log.carry_player(player)
 
 <<<<<<< HEAD:leap_frog.py
@@ -913,6 +971,7 @@ while running:
 
     lake_sprites.draw(screen)
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
     
     cave_frog_sprites.draw(screen)
     cave_frog_sprites.update(screen)
@@ -938,6 +997,12 @@ while running:
     logs_group.update()
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 
+=======
+    sprites.update()
+    sprites.draw(screen)
+    health_bar.update()
+    
+>>>>>>> 856efea (Removed logs from first screen.):car moving1.py
     pygame.display.flip()
     clock.tick(60)
 
