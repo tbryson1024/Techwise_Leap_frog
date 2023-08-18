@@ -103,12 +103,15 @@ mixer.music.play()
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 40ede70 (adding leap_frog.py)
 =======
 
 
 
+=======
+>>>>>>> fdfc726 (saving changes)
 if current_level == 1:
     mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
     mixer.music.play(-1)  # play non-stop
@@ -126,7 +129,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.health = 100  # health bar start width
         self.lives = 1  # number of lives
-        self.alive = True
+        self.alive = True # type: ignore
         self.is_animating = False
         self.directions = ["right", "left", "up", "down"]
         self.frog_sprites = {direction: [] for direction in self.directions}
