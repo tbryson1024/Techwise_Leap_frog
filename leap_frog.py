@@ -898,10 +898,15 @@ sprites.add(player) #Add player last to keep on top
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+<<<<<<< HEAD
 cave_fro_sprites = pygame.sprite.LayeredUpdates()
+=======
+log_sprites = pygame.sprite.LayeredUpdates()
+log_sprites.add(log1, log2, log3)
+>>>>>>> 1f515aa (Got frog on top of logs, now have to remove from screen 1 again.)
 
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites,car_sprites,player_sprites)
+all_sprites.add(background_sprites,car_sprites,log_sprites, player_sprites)
 
 <<<<<<< HEAD:leap_frog.py
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
