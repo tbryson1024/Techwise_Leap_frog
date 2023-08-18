@@ -731,8 +731,12 @@ while running:
 
  #   cave_sprites.update()
     pygame.display.flip()
+<<<<<<< HEAD
     clock.tick(60)
 <<<<<<< HEAD
 
 =======
 >>>>>>> 2b4e666 (add new sound)
+=======
+    clock.tick(60)
+>>>>>>> 8a35226 (deleted empty line)
