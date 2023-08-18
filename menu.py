@@ -19,7 +19,7 @@ GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
 # Stop music function
-def stop_Music(): 
+def stop_Music():
     pygame.mixer.music.stop()
 
 
@@ -98,7 +98,7 @@ def run_gameplay_screen():
 def background_image():
 
     # Load the background image
-    background_image = pygame.image.load('Images/menu-background2.jpg') 
+    background_image = pygame.image.load('Images/menu-background2.jpg')
 
     # Get the size of the background image
     image_width, image_height = background_image.get_size()
