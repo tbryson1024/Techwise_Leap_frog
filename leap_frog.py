@@ -28,6 +28,8 @@ BG_SWAMP_SIZE = 1080
 current_background = pygame.image.load('Images/road2.jpg').convert()
 current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
+mixer.music.load("Images/Swamps Nature.wav")
+mixer.music.play(-1)  
 #mixer.music.load("Images/Swamps Nature.wav")
 #mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
 #mixer.music.play(-1)  # play non-stop
@@ -37,9 +39,7 @@ road_sound = mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav
 mixer.music.play()
 #swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
 #dead_sound = mixer.music.load("Images/mixkit-futuristic-electronic-engine-fail-2941.wav")
-
 #mixer.music.play(1)  # play non-stop
-
 
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
@@ -137,8 +137,6 @@ class Player(pygame.sprite.Sprite):
         return pygame.mask.from_surface(self.image)
     
     def reset_player(self):
-#        self.frog_position = [500, 675]  # Initial position of the frog
-#        self.rect.topleft = self.frog_position
         self.direction = "up"
         self.health = 100
         self.lives = 1
@@ -221,7 +219,10 @@ class New_level(pygame.sprite.Sprite): # snippet of image on top of screen takin
         self.rect.x = pos_x
         self.rect.y = pos_y
 
+<<<<<<< HEAD
        
+=======
+>>>>>>> 0823d0d (adding leap_frog.py)
     def update(self):
         screen.blit(self.image, self.rect)
 
@@ -523,10 +524,14 @@ log_sprites.add(log1, log2, log3)
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+<<<<<<< HEAD
+=======
+cave_frog_sprites = pygame.sprite.LayeredUpdates()
+
+>>>>>>> 0823d0d (adding leap_frog.py)
 all_sprites = pygame.sprite.LayeredUpdates()
 all_sprites.add(background_sprites,car_sprites, player_sprites)
 
-#cave_fro_sprites.add(player, background_sprites,cave_frog1,cave_frog2,cave_frog3,cave_frog4)
 
 scroll_x = 0
 scroll_y = 0
@@ -540,15 +545,24 @@ while running:
             running = False
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     player.update()
 =======
+=======
+
+>>>>>>> 0823d0d (adding leap_frog.py)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
+<<<<<<< HEAD
         player.move_right()
         
+=======
+        player.move_right
+
+>>>>>>> 0823d0d (adding leap_frog.py)
     elif keys[pygame.K_LEFT]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
@@ -574,7 +588,11 @@ while running:
 
     
 
+<<<<<<< HEAD
 >>>>>>> 33ff7ab (add sounds to different levels)
+=======
+
+>>>>>>> 0823d0d (adding leap_frog.py)
 
     # Check for collision between player and cars
     for car in cars:
@@ -626,7 +644,6 @@ while running:
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
         all_sprites.add(background_sprites, alligator, log_sprites)
-        #all_sprites.add(player_sprites)
 
         all_sprites.add(alligators_sprites, cave1,cave2,cave3)
 >>>>>>> a85e74e (Corrected logs / frogs - now working as intended)
@@ -643,11 +660,20 @@ while running:
         player.reset_player()
         
 
+<<<<<<< HEAD
+=======
+        player.reset_player()
+        
+
+>>>>>>> 0823d0d (adding leap_frog.py)
         mixer.music.stop()
         swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
         mixer.music.play()
 
+<<<<<<< HEAD
 >>>>>>> 33ff7ab (add sounds to different levels)
+=======
+>>>>>>> 0823d0d (adding leap_frog.py)
         alligators = []
         num_alligators = 4
 
@@ -732,6 +758,7 @@ while running:
 
     lake_sprites.draw(screen)
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     cave_fro_sprites.draw(screen)
     cave_fro_sprites.update(screen)
@@ -742,14 +769,22 @@ while running:
 
     all_sprites.draw(screen)
 =======
+=======
+    cave_frog_sprites.draw(screen)
+    cave_frog_sprites.update(screen)
+>>>>>>> 0823d0d (adding leap_frog.py)
     all_sprites.draw(screen)
     player_sprites.draw(screen)
     all_sprites.update()
 >>>>>>> a85e74e (Corrected logs / frogs - now working as intended)
 
     health_bar.update()
+<<<<<<< HEAD
 
  #   cave_sprites.update()
+=======
+ 
+>>>>>>> 0823d0d (adding leap_frog.py)
     pygame.display.flip()
 <<<<<<< HEAD
     clock.tick(60)
