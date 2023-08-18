@@ -15,11 +15,14 @@ pygame.mixer.init(devicename='directsound')
 clock = pygame.time.Clock()
 
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
 current_level = 1
 =======
 show_logs = False
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 
+=======
+>>>>>>> e62f4f0 (Saving changes to logs3):car moving1.py
 SCREEN_WIDTH = 1080
 SCREEN_HEIGHT = 720
 
@@ -120,6 +123,16 @@ class Player(pygame.sprite.Sprite):
             self.direction = "down"
             self.move(0, 3)
 
+<<<<<<< HEAD:leap_frog.py
+=======
+    def move(self, dx, dy):
+        self.dx = dx
+        self.dy = dy
+        self.frog_position[0] += dx  # Update horizontal coordinate
+        self.frog_position[1] += dy  # Update vertical coordinate
+        self.rect.topleft = self.frog_position
+
+>>>>>>> e62f4f0 (Saving changes to logs3):car moving1.py
     def animate(self):
         self.is_animating = True
 
@@ -157,7 +170,29 @@ class Player(pygame.sprite.Sprite):
                 self.current_sprite = 0
                 self.is_animating = False
 
+<<<<<<< HEAD:leap_frog.py
         self.image = self.frog_sprites[self.direction][int(self.current_sprite)]
+=======
+        # Check if the player is on a log
+        on_log = False
+        for log in logs_group:
+            if pygame.sprite.collide_mask(self, log):
+                on_log = True
+                if not (keys[pygame.K_LEFT] or keys[pygame.K_RIGHT] or keys[pygame.K_UP] or keys[pygame.K_DOWN]):
+                    log.carry_player(self)  # Move the player with the log
+
+        # Update the frog's position based on movement and log interaction
+        if not on_log:
+            if self.direction == "right":
+                self.image = self.sprites_right[int(self.current_sprite)]
+            elif self.direction == "left":
+                self.image = self.sprites_left[int(self.current_sprite)]
+            elif self.direction == "up":
+                self.image = self.sprites_up[int(self.current_sprite)]
+            elif self.direction == "down":
+                self.image = self.sprites_down[int(self.current_sprite)]
+
+>>>>>>> e62f4f0 (Saving changes to logs3):car moving1.py
         self.rect.topleft = self.frog_position
 
     def get_mask(self):
@@ -379,16 +414,13 @@ class Log(pygame.sprite.Sprite):
             self.rect.left = SCREEN_WIDTH
 
     def carry_player(self, player):
-        if self.speed > 0:
-            player.move(self.speed, 0)
-        else:
-            player.move(self.speed, 0)
+       player.frog_position[0] += self.speed  # Adjust the frog's position based on the log's speed
+       player.rect.topleft = player.frog_position
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
     
 log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-#updated speed to - to switch directions, remove - if doesn't work
 log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
 log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
 
@@ -628,36 +660,6 @@ alligators_sprites.add(alligator)
 logs_group = pygame.sprite.Group()
 logs_group.add(log1, log2, log3)
 
-
-for i in range(5):
-    image_path = "Images/log.png"
-    pos_x = random.randint(100, 300)
-    pos_y = 300 + i * 95
-    speed = random.randint(5, 10)
-    log = Log(image_path, pos_x, pos_y, speed)
-    log.image = pygame.image.load(image_path).convert()
-    log.image.set_colorkey(0, 0)
-    log.image = pygame.transform.scale(log.image, (150, 50))
-    logs_group.add(log)
-
-log.set_player(player)
-
-for i in range(5):
-    image_path = "Images/log.png"
-    pos_x = random.randint(100, 300)
-    pos_y = 300 + i * 95
-    # Adjust the spacing between logs
-    speed = random.randint(5, 10)
-    # Random speed for logs
-
-    log = Log(image_path, pos_x, pos_y, speed)
-    log.image = pygame.image.load(image_path).convert()
-    # Load the image
-    log.image.set_colorkey(0, 0)
-    # Remove the background
-    log.image = pygame.transform.scale(log.image, (150, 50))
-    # Scale the image to the desired dimensions
-
 all_sprites = pygame.sprite.LayeredUpdates()
 <<<<<<< HEAD:leap_frog.py
 all_sprites.add(background_sprites,car_sprites,player_sprites)
@@ -717,12 +719,14 @@ while running:
 
     if player.frog_position[0] >= BG_ROAD_SIZE:
        current_background = swamp_bg
-       show_logs = True  # Set show_logs to True when the player reaches the new level
 
+<<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
 =======
     if show_logs:
         player.update()
+=======
+>>>>>>> e62f4f0 (Saving changes to logs3):car moving1.py
 
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
     # Check for collision between player and cars
@@ -816,7 +820,6 @@ while running:
     for log in logs_group:
         if pygame.sprite.collide_mask(player, log):
             log.carry_player(player)
-            player.move(log.speed, 0)
 
 <<<<<<< HEAD:leap_frog.py
     # Check for collision between player and logs
@@ -907,8 +910,7 @@ while running:
     
 =======
     player_sprites.draw(screen)
-    if show_logs:
-        logs_group.draw(screen)
+    logs_group.draw(screen)
     all_sprites.update()
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
     all_sprites.draw(screen)
