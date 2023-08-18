@@ -1293,11 +1293,21 @@ while running:
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
 
         lilypads = LilyPad(300,500) #creating lilypads in it's positions
 <<<<<<< HEAD
+=======
+        
+        lilypad1 = LilyPad(200,500) #creating lilypads in it's positions
+        lilypad2 = LilyPad(500, 350)
+        lilypad3 = LilyPad(700, 500)
+
+        lilypad_sprites = pygame.sprite.LayeredUpdates()
+        lilypad_sprites.add(lilypad1, lilypad2, lilypad3)
+>>>>>>> 10ecf95 (added more lilypads)
 
         all_sprites.update()
         new_level.kill()
@@ -1318,6 +1328,7 @@ while running:
         
         all_sprites.add(alligators_sprites, lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
 
+<<<<<<< HEAD
 =======
         lilypads=LilyPad(300,500) #creating lilypads in it's positions
         all_sprites.add(background_sprites, player_sprites, alligators_sprites,lilypads)
@@ -1391,6 +1402,9 @@ while running:
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
 =======
 >>>>>>> 33ceabe (Merging main and lilypads in lilypads branch)
+=======
+        all_sprites.add(alligators_sprites, lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
+>>>>>>> 10ecf95 (added more lilypads)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -1560,6 +1574,7 @@ while running:
 =======
 >>>>>>> c721dbd (Added more logs and opposite directions)
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     #lilypads = []
@@ -1713,6 +1728,9 @@ while running:
 
 =======
 >>>>>>> d0ac0e1 (saving updates)
+=======
+       #check for collision between player and caves
+>>>>>>> 10ecf95 (added more lilypads)
     if current_level == 2 and pygame.sprite.collide_mask(player, cave1) :
         cave_frog_sprites.add(cave_frog1)
         player.reset_pos()
