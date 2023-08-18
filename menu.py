@@ -18,18 +18,9 @@ import subprocess #allows you to run other Python scripts. Needed to link to gam
 pygame.init()
 pygame.mixer.init()
 
-#Mp3 file
-mp3_file = "sounds/background.mp3"
-pygame.mixer.music.load(mp3_file)
-
-#play the music
+pygame.mixer.music.load("sounds/birds.mp3")
 pygame.mixer.music.play()
 pygame.mixer.music.set_volume(0.5)
-
-#stop the music 
-def stop_Music(): 
-    pygame.mixer.music.stop()
-
 
 screen_width = 800
 screen_height = 600
@@ -42,10 +33,14 @@ GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
 # Stop music function
 def stop_Music(): 
     pygame.mixer.music.stop()
 
+<<<<<<< HEAD
 
 # Function to draw the menu with the buttons
 def draw_menu():
@@ -55,11 +50,11 @@ def draw_menu():
 #Background sound
 mixer.music.load('sounds/background.mp3')
 mixer.music.play()
+=======
+>>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
 
 # Function to draw the menu with the buttons
 def draw_menu():
-    #screen.fill(GREEN)  # Fill the screen with green color
-    # change to correct path for font
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
     text = font.render("Frogger", True, BLACK)  # Black text
 >>>>>>> bbaad14 (adding menu)
@@ -89,6 +84,7 @@ def draw_gameplay_screen():
     pygame.display.flip()  # Update the display
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # Function to handle button click events
 def handle_button_click(mouse_pos):
@@ -107,13 +103,30 @@ def handle_button_click(mouse_pos):
 
     if is_mouse_over_start_button_x and is_mouse_over_start_button_y:
 =======
+=======
+
+>>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
 # Function to handle button click events
 def handle_button_click(mouse_pos):
-    start_button_x, start_button_y, start_button_width, start_button_height = screen_width // 2 - 100, 300, 200, 50
-    quit_button_x, quit_button_y, quit_button_width, quit_button_height = screen_width // 2 - 100, 400, 200, 50
+    start_button_x = screen_width // 2 - 100
+    start_button_y = 300
+    start_button_width = 200
+    start_button_height = 50
 
+<<<<<<< HEAD
     if start_button_x <= mouse_pos[0] <= start_button_x + start_button_width and start_button_y <= mouse_pos[1] <= start_button_y + start_button_height:
 >>>>>>> bbaad14 (adding menu)
+=======
+    quit_button_x = screen_width // 2 - 100
+    quit_button_y = 400
+    quit_button_width = 200
+    quit_button_height = 50
+
+    is_mouse_over_start_button_x = start_button_x <= mouse_pos[0] <= start_button_x + start_button_width
+    is_mouse_over_start_button_y = start_button_y <= mouse_pos[1] <= start_button_y + start_button_height
+
+    if is_mouse_over_start_button_x and is_mouse_over_start_button_y:
+>>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
         click_Sound = mixer.Sound('sounds/click.wav')
         click_Sound.play()
         stop_Music()
@@ -125,6 +138,7 @@ def handle_button_click(mouse_pos):
     
     is_mouse_over_quit_button_x = quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width
     is_mouse_over_quit_button_y = quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height
+<<<<<<< HEAD
 
     if is_mouse_over_quit_button_x and is_mouse_over_quit_button_y:
 =======
@@ -138,6 +152,10 @@ def handle_button_click(mouse_pos):
         run_gameplay_screen()
     elif quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width and quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height:
 >>>>>>> bbaad14 (adding menu)
+=======
+
+    if is_mouse_over_quit_button_x and is_mouse_over_quit_button_y:
+>>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
         pygame.quit()
         quit()
 
@@ -172,12 +190,15 @@ def background_image():
     background_image = pygame.transform.scale(background_image, (scaled_width, scaled_height))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     # Calculate the position to center the image
     center_x = screen_width // 2 - scaled_width // 2
     center_y = screen_height // 2 - scaled_height // 2
 
 >>>>>>> bbaad14 (adding menu)
+=======
+>>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
     # Resize the background image to fit the screen
     background_image = pygame.transform.scale(background_image, (screen_width, screen_height))
 
@@ -208,6 +229,7 @@ def main():
 =======
                     user_choice = handle_button_click(pygame.mouse.get_pos())
                     if(user_choice == 1):
+                        # User has pressed Start, start game
                         return
 >>>>>>> 4e2ed1f (menu changes)
         draw_menu() #Puts background and text together
