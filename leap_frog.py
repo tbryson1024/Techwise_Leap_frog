@@ -10,9 +10,13 @@ pygame.init()
 pygame.mixer.init(devicename='directsound')
 clock = pygame.time.Clock()
 
+current_level = 1
+
 SCREEN_WIDTH = 1080
 SCREEN_HEIGHT = 720
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
 pygame.display.set_caption('Leap Frog')
 
 road_bg = pygame.image.load('Images/road2.jpg').convert()
@@ -28,10 +32,14 @@ BG_SWAMP_SIZE = 1080
 current_background = pygame.image.load('Images/road2.jpg').convert()
 current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-#mixer.music.load("Images/Swamps Nature.wav")
-mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
-mixer.music.play(-1)  # play non-stop
 
+if current_level == 1:
+    mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
+    mixer.music.play(-1)  # play non-stop
+
+if current_level == 2:
+    mixer.music.load("Images/Swamps Nature.wav")
+    mixer.music.play(-1)  # play non-stop
 
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
@@ -213,6 +221,8 @@ class New_level(pygame.sprite.Sprite): # snippet of image on top of screen takin
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
+    
+    current_level = 2
 
 <<<<<<< HEAD
        
@@ -525,14 +535,14 @@ car_sprites.add(cars)
 
 lake_sprites = pygame.sprite.LayeredUpdates()
 
-log1 = Log("Images/log.png", 200, 230, 5)
-log2 = Log("Images/log.png", 250, 290, -5)
-log3 = Log("Images/log.png", 500, 380, 5)
-log4 = Log("Images/log.png", 650, 470, -5)
-log5 = Log("Images/log.png", 730, 525, 5)
-log6 = Log("Images/log.png", 850, 600, -5)
-log7 = Log("Images/log.png", 500, 250,  5)
-log8 = Log("Images/log.png", 730, 150, -5)
+log1 = Log("Images/log.png", 200, 250, 5)
+log2 = Log("Images/log.png", 300, 500, 5)
+log3 = Log("Images/log.png", 400, 350, -5)
+log4 = Log("Images/log.png", 500, 550, -5)
+log5 = Log("Images/log.png", 600, 400, 5)
+log6 = Log("Images/log.png", 700, 300, 5)
+log7 = Log("Images/log.png", 800, 600, -5)
+log8 = Log("Images/log.png", 900, 450, -5)
 
 
 <<<<<<< HEAD
@@ -672,7 +682,9 @@ while running:
 >>>>>>> 6ce169e (adding leap_frog.py)
       # Check for collision between player and new_level
     if pygame.sprite.collide_mask(player, new_level):
+        current_level = 2
         player.reset_pos()
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       
@@ -712,6 +724,8 @@ while running:
 >>>>>>> a85e74e (Corrected logs / frogs - now working as intended)
 =======
 
+=======
+>>>>>>> 2d9fae6 (Added more logs and opposite directions)
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
@@ -729,7 +743,6 @@ while running:
         cave_frog4 = CaveFrog(600,150)
         cave_frog_sprites = pygame.sprite.LayeredUpdates()
         
-
         all_sprites.add(alligators_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
 >>>>>>> c7147e1 (Updated caves)
 
@@ -781,31 +794,33 @@ while running:
             all_sprites.add(alligator)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
 >>>>>>> c7147e1 (Updated caves)
+=======
+>>>>>>> 2d9fae6 (Added more logs and opposite directions)
     alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
     player_colliding_with_alligator = False
 
     for gator in alligators_hit:
-        if not player_colliding_with_alligator:
-            player.health -= 10
-            if player.health == 0 and player.lives > 0:
-                player.lives -= 1
-                player.health = 100
-            elif player.health == 0 and player.lives == 0:
-                player.alive = False
+        player.health -= 10
+        if player.health == 0 and player.lives > 0:
+            player.lives -= 1
+            player.health = 100
+        elif player.health == 0 and player.lives == 0:
+            player.alive = False
             player_colliding_with_alligator = True
 
-    if len(alligators_hit) == 0:
+    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(log, player):
         player_colliding_with_alligator = False
 
     # Check for collision between player and logs
-    for log in log_sprites:
-        if pygame.sprite.collide_mask(log, player):
-            log.carry_player(player)
-
+    if current_level == 2:
+        for log in log_sprites:
+            if pygame.sprite.collide_mask(log, player):
+                log.carry_player(player)
 
 <<<<<<< HEAD
 
@@ -825,6 +840,7 @@ while running:
 =======
 >>>>>>> 0aa13e0 (adding cave 4)
     #check for collision between player and caves
+<<<<<<< HEAD
     if player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave1) :
 <<<<<<< HEAD
          
@@ -846,22 +862,25 @@ while running:
             player.reset_pos()  # Reset the player's position
             cave_frog3.image.set_colorkey((0, 0, 0)) 
 =======
+=======
+    if current_level == 2 and pygame.sprite.collide_mask(player, cave1) :
+>>>>>>> 2d9fae6 (Added more logs and opposite directions)
         cave_frog_sprites.add(cave_frog1)
         player.reset_pos()
         cave_frog1.image.set_colorkey((0, 0, 0))
 
-    elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave2):
+    elif current_level == 2 and pygame.sprite.collide_mask(player, cave2):
         cave_frog_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
         cave_frog2.image.set_colorkey((0, 0, 0))
 
-    elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave3):
+    elif current_level == 2 and pygame.sprite.collide_mask(player, cave3):
         cave_frog_sprites.add(cave_frog3)
         player.reset_pos()  # Reset the player's position
         cave_frog3.image.set_colorkey((0, 0, 0))
 >>>>>>> c7147e1 (Updated caves)
 
-    elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave4):
+    elif current_level == 2 and pygame.sprite.collide_mask(player, cave4):
        cave_frog_sprites.add(cave_frog4)
        player.reset_pos()  # Reset the player's position
        cave_frog4.image.set_colorkey((0, 0, 0)) 
@@ -915,6 +934,7 @@ while running:
 >>>>>>> 6ce169e (adding leap_frog.py)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
  #   cave_sprites.update()
 =======
  
@@ -930,6 +950,9 @@ while running:
     clock.tick(60)
 >>>>>>> 8a35226 (deleted empty line)
 =======
+=======
+mixer.music.stop()
+>>>>>>> 2d9fae6 (Added more logs and opposite directions)
 pygame.quit()
 sys.exit()
 >>>>>>> c7147e1 (Updated caves)
