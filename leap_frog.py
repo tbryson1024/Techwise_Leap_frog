@@ -65,6 +65,7 @@ if current_level == 2:
     mixer.music.play(-1)  # play non-stop
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> d0ac0e1 (saving updates)
@@ -122,6 +123,9 @@ if current_level == 2:
 
 
 >>>>>>> d0ac0e1 (saving updates)
+=======
+# Classes
+>>>>>>> 8ef4a37 (Updating final_logs with all current changes)
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
 
@@ -356,7 +360,12 @@ class Car(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
+<<<<<<< HEAD
 # Create cars
+=======
+
+	# Create cars
+>>>>>>> 8ef4a37 (Updating final_logs with all current changes)
 cars = pygame.sprite.Group()
 car_images_right = [
      "Images/car3-right.png", "Images/car4-right.png", "Images/car5-right.png", "Images/car6-right.png"
@@ -365,10 +374,9 @@ car_images_left = [
     "Images/car1-left.png", "Images/car2-left.png", "Images/car3-left.png", "Images/car4-left.png", "Images/car5-left.png", "Images/car6-left.png"
 ]
 
-# Cars 1 to 6 move from left to right
+	# Cars 1 to 6 move from left to right
 for i in range(3):
     image_path = car_images_right[i]
-#    pos_x = -random.randint(200, 450)  # Starting offscreen from the left
     pos_x = SCREEN_WIDTH + random.randint(100, 460)
     pos_y = 90 + i * 135  # Adjust the spacing between cars
     speed = random.randint(7, 14)  # Random speed 
@@ -378,7 +386,7 @@ for i in range(3):
     car.image = pygame.transform.scale(car.image, (145, 145))  # Scale the image to the desired dimensions
     cars.add(car)
 
-# Cars 7 to 12 move from right to left
+	# Cars 7 to 12 move from right to left
 for i in range(4):
     image_path = car_images_left[i]
     pos_x = SCREEN_WIDTH + random.randint(120, 470)  # Starting offscreen from the right
@@ -483,6 +491,7 @@ class Gator(pygame.sprite.Sprite):
             self.sprites[i].set_colorkey((255, 255, 255))
             # Control the image size
             self.sprites[i] = pygame.transform.scale(self.sprites[i], (100, 100))
+<<<<<<< HEAD
         
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
@@ -491,6 +500,14 @@ class Gator(pygame.sprite.Sprite):
         self.rect.y = pos_y
 
         self.speed = random.randrange(1, 4)
+=======
+            self.current_sprite = 0
+            self.image = self.sprites[self.current_sprite]
+            self.rect = self.image.get_rect()
+            self.rect.x = pos_x
+            self.rect.y = pos_y
+            self.speed = random.randrange(1, 4)
+>>>>>>> 8ef4a37 (Updating final_logs with all current changes)
 
     def animate(self):
         self.is_animating = True
@@ -678,7 +695,7 @@ class Health_bar:
         if not self.player.alive:
             self.screen.fill((0, 0, 0))
             #game_over_sound = mixer.Sound("game over.wav")
-           # game_over_sound.play()
+            #game_over_sound.play()
             #game_over = pygame.image.load('game over.jpg').convert()
             #game_over_rect = game_over.get_rect()
             #game_over_rect.center = (500, 300)
@@ -687,7 +704,7 @@ class Health_bar:
             text1Rect = text1.get_rect()
             text1Rect.bottom = 550
             text1Rect.left = 350
-           # self.screen.blit(game_over, game_over_rect)
+            #self.screen.blit(game_over, game_over_rect)
             self.screen.blit(text1, text1Rect)
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE]:
@@ -698,6 +715,7 @@ class Health_bar:
                player.rect.topleft = player.frog_position
                player.direction = "up"
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                #Clear the cave frog
@@ -719,6 +737,9 @@ class Health_bar:
 
 >>>>>>> 33ceabe (Merging main and lilypads in lilypads branch)
         #Print Lives to screen
+=======
+        # Print Lives to screen
+>>>>>>> 8ef4a37 (Updating final_logs with all current changes)
         font = pygame.font.Font('freesansbold.ttf', 30)
         text = font.render('Lives: ' + str(player.lives), True, (0,0,0))
         screen.blit(text,(650,20))
@@ -1063,7 +1084,13 @@ scroll_x = 0
 scroll_y = 0
   
 
+<<<<<<< HEAD
 #main Game loop
+=======
+
+ # Main Game loop #
+
+>>>>>>> 8ef4a37 (Updating final_logs with all current changes)
 running = True
 while running:
     for event in pygame.event.get():
@@ -1534,6 +1561,7 @@ while running:
 >>>>>>> c721dbd (Added more logs and opposite directions)
 
 
+<<<<<<< HEAD
     #lilypads = []
     #num_lilypads = 4
 
@@ -1663,6 +1691,15 @@ while running:
 
     elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave2): 
 >>>>>>> ce4576c (adding cave 4):car moving1.py
+=======
+    """  lilypads = []
+    num_lilypads = 4
+
+    for lilypad in range(num_lilypads):
+        lilypad = LilyPad(200, 400)
+        lilypads.append(lilypad)
+        all_sprites.add(lilypads) """
+>>>>>>> 8ef4a37 (Updating final_logs with all current changes)
 
             all_sprites.add(cave_frog2)
             player.reset_pos()  # Reset the player's position
@@ -1747,7 +1784,7 @@ while running:
 mixer.music.stop()
 
 pygame.quit()
-sys.exit()
+
 
 =======
 >>>>>>> ce4576c (adding cave 4):car moving1.py
