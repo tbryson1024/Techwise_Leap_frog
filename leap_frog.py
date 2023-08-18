@@ -1,5 +1,9 @@
 import pygame
+<<<<<<< HEAD:leap_frog.py
 from pygame import Surface, mixer, sprite
+=======
+from pygame import Surface, mixer
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 import sys
 import random
 import menu
@@ -10,7 +14,11 @@ pygame.init()
 pygame.mixer.init(devicename='directsound')
 clock = pygame.time.Clock()
 
+<<<<<<< HEAD:leap_frog.py
 current_level = 1
+=======
+show_logs = False
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 
 SCREEN_WIDTH = 1080
 SCREEN_HEIGHT = 720
@@ -31,6 +39,7 @@ BG_SWAMP_SIZE = 1080
 
 current_background = pygame.image.load('Images/road2.jpg').convert()
 current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+<<<<<<< HEAD:leap_frog.py
 
 
 #mixer.music.load("Images/Swamps Nature.wav")
@@ -55,6 +64,8 @@ if current_level == 1:
 if current_level == 2:
     mixer.music.load("Images/Swamps Nature.wav")
     mixer.music.play(-1)  # play non-stop
+=======
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 
 
 class Player(pygame.sprite.Sprite):
@@ -312,6 +323,7 @@ class Gator(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
+<<<<<<< HEAD
 class LilyPad(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         super().__init__()
@@ -330,6 +342,61 @@ class LilyPad(pygame.sprite.Sprite):
             self.rect.y += random.uniform(-1, 1)
 
 
+=======
+class Log(pygame.sprite.Sprite):
+    def __init__(self, image_path, pos_x, pos_y, speed):
+        super().__init__()
+        self.image_path = pygame.image.load(image_path).convert()
+        self.image = self.image_path
+        self.rect = self.image.get_rect()
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+        self.speed = random.randrange(1,4)  
+        self.player = None  # Player attribute
+        self.image = pygame.transform.scale(self.image, (150, 75))
+        self.image.set_colorkey((0, 0, 0))
+
+    def set_player(self, player):
+        self.player = player
+
+    def update(self):
+        self.rect.x += self.speed
+        if self.speed > 0 and self.rect.left > SCREEN_WIDTH:
+            self.reset_position()
+        elif self.speed < 0 and self.rect.right < 0:
+            self.reset_position()
+
+        # Check for collision between player and logs
+        if self.player is not None:  # Check if the player is set
+            player_on_log = pygame.sprite.collide_mask(self.player, self)
+            if player_on_log:
+                self.player.move(self.speed, 0)
+
+    def reset_position(self):
+        if self.speed > 0:
+            self.rect.right = 0
+        else:
+            self.rect.left = SCREEN_WIDTH
+
+    def carry_player(self, player):
+        if self.speed > 0:
+            player.move(self.speed, 0)
+        else:
+            player.move(self.speed, 0)
+
+    def get_mask(self):
+        return pygame.mask.from_surface(self.image)
+    
+log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+#updated speed to - to switch directions, remove - if doesn't work
+log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+
+player = Player(Player.frog_position[0], Player.frog_position[1])
+log1.set_player(player)
+log2.set_player(player)
+log3.set_player(player)
+>>>>>>> 1b9f87d (Adding logs to new main code and backgrounds)
 
 class LilyPad(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
@@ -558,8 +625,45 @@ log_sprites.add(log1, log2, log3, log4, log5, log6, log7, log8, log9, log10, log
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+logs_group = pygame.sprite.Group()
+logs_group.add(log1, log2, log3)
+
+
+for i in range(5):
+    image_path = "Images/log.png"
+    pos_x = random.randint(100, 300)
+    pos_y = 300 + i * 95
+    speed = random.randint(5, 10)
+    log = Log(image_path, pos_x, pos_y, speed)
+    log.image = pygame.image.load(image_path).convert()
+    log.image.set_colorkey(0, 0)
+    log.image = pygame.transform.scale(log.image, (150, 50))
+    logs_group.add(log)
+
+log.set_player(player)
+
+for i in range(5):
+    image_path = "Images/log.png"
+    pos_x = random.randint(100, 300)
+    pos_y = 300 + i * 95
+    # Adjust the spacing between logs
+    speed = random.randint(5, 10)
+    # Random speed for logs
+
+    log = Log(image_path, pos_x, pos_y, speed)
+    log.image = pygame.image.load(image_path).convert()
+    # Load the image
+    log.image.set_colorkey(0, 0)
+    # Remove the background
+    log.image = pygame.transform.scale(log.image, (150, 50))
+    # Scale the image to the desired dimensions
+
 all_sprites = pygame.sprite.LayeredUpdates()
+<<<<<<< HEAD:leap_frog.py
 all_sprites.add(background_sprites,car_sprites,player_sprites)
+=======
+all_sprites.add(background_sprites, player_sprites, car_sprites, log1, log2, log3)
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 
 cave1 = Caves(-90, -20, 'Images/minicave.png',420,420)
 cave2 = Caves(50, -20, 'Images/minicave.png',420,420)
@@ -613,7 +717,14 @@ while running:
 
     if player.frog_position[0] >= BG_ROAD_SIZE:
        current_background = swamp_bg
+       show_logs = True  # Set show_logs to True when the player reaches the new level
 
+<<<<<<< HEAD:leap_frog.py
+=======
+    if show_logs:
+        player.update()
+
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
     # Check for collision between player and cars
     for car in cars:
         if pygame.sprite.collide_mask(player, car):
@@ -679,8 +790,14 @@ while running:
             alligators.append(alligator)
 
             all_sprites.add(alligator)
+<<<<<<< HEAD:leap_frog.py
 
     alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+=======
+    
+    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+   
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
     player_colliding_with_alligator = False
 
     for gator in alligators_hit:
@@ -694,6 +811,12 @@ while running:
 
     if len(alligators_hit) == 0 or pygame.sprite.collide_mask(log, player):
         player_colliding_with_alligator = False
+    
+    # Check for collision between player and logs
+    for log in logs_group:
+        if pygame.sprite.collide_mask(player, log):
+            log.carry_player(player)
+            player.move(log.speed, 0)
 
 <<<<<<< HEAD:leap_frog.py
     # Check for collision between player and logs
@@ -777,10 +900,17 @@ while running:
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
+<<<<<<< HEAD:leap_frog.py
     
     cave_frog_sprites.draw(screen)
     cave_frog_sprites.update(screen)
     
+=======
+    player_sprites.draw(screen)
+    if show_logs:
+        logs_group.draw(screen)
+    all_sprites.update()
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
     all_sprites.draw(screen)
     lilypad_sprites.draw(screen)
     
@@ -788,9 +918,14 @@ while running:
     all_sprites.update()
 
     health_bar.update()
+<<<<<<< HEAD:leap_frog.py
 
     cave_frog_sprites.draw(screen)
     cave_frog_sprites.update()
+=======
+    player.update()
+    logs_group.update()
+>>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 
     pygame.display.flip()
     clock.tick(60)
