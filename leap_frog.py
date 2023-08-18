@@ -1373,6 +1373,7 @@ while running:
  #   cave_sprites.update()
 >>>>>>> b885374 (add the fourth cave):car moving1.py
     pygame.display.flip()
+<<<<<<< HEAD
     clock.tick(60)
 <<<<<<< HEAD
 
@@ -1388,4 +1389,10 @@ sys.exit()
 =======
 =======
 >>>>>>> 2b4e666 (add new sound)
+<<<<<<< HEAD:leap_frog.py
 >>>>>>> 9bcd7ea (add new sound):car moving1.py
+=======
+=======
+    clock.tick(60)
+>>>>>>> 8a35226 (deleted empty line)
+>>>>>>> 4b6ba23 (deleted empty line):car moving1.py
