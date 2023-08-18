@@ -22,9 +22,14 @@ pygame.mixer.music.load("sounds/birds.mp3")
 pygame.mixer.music.play()
 pygame.mixer.music.set_volume(0.5)
 
+<<<<<<< HEAD
 screen_width = 800
 screen_height = 600
 >>>>>>> bbaad14 (adding menu)
+=======
+screen_width = 1080
+screen_height = 720
+>>>>>>> ce4576c (adding cave 4)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Menu Screen")
 

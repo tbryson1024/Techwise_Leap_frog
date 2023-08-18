@@ -244,16 +244,18 @@ class Player(pygame.sprite.Sprite):
         self.lives = 1
         self.alive = True
 
+<<<<<<< HEAD:leap_frog.py
     def reset_pos(self):
        self.frog_position = [500, 675]  # Initial position of the frog
        self.rect.topleft = self.frog_position
 
 
 
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
     def reset_pos(self):
        self.frog_position = [500, 675]  # Initial position of the frog
        self.rect.topleft = self.frog_position
-
 
 
 
@@ -265,6 +267,10 @@ class Car(pygame.sprite.Sprite):
         self.rect.x = pos_x
         self.rect.y = pos_y
         self.speed = speed
+<<<<<<< HEAD:leap_frog.py
+=======
+        
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 
     def update(self):
         self.rect.x += self.speed
@@ -318,7 +324,6 @@ for i in range(4):
     cars.add(car)
 
 
-
 class New_level(pygame.sprite.Sprite): # snippet of image on top of screen taking player to second background
     def __init__(self, pos_x, pos_y):
         super().__init__()
@@ -336,13 +341,20 @@ class New_level(pygame.sprite.Sprite): # snippet of image on top of screen takin
 =======
       
        
+<<<<<<< HEAD:leap_frog.py
 #    def update(self):
 #        screen.blit(self.image, self.rect)
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
+=======
+    def update(self):
+        screen.blit(self.image, self.rect)
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 
+    def get_mask(self):
+        return pygame.mask.from_surface(self.image)
 
 class Lake(pygame.sprite.Sprite): # snippet of lake image on top of background
     def __init__(self, pos_x, pos_y):
@@ -356,7 +368,6 @@ class Lake(pygame.sprite.Sprite): # snippet of lake image on top of background
       
     def update(self):
         screen.blit(self.image, self.rect)
-
 
 class Gator(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
@@ -410,6 +421,10 @@ class Gator(pygame.sprite.Sprite):
             if self.rect.right > SCREEN_WIDTH:
                 self.kill()
 
+<<<<<<< HEAD:leap_frog.py
+=======
+
+>>>>>>> ce4576c (adding cave 4):car moving1.py
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
@@ -485,6 +500,7 @@ log2.set_player(player)
 log3.set_player(player)
 >>>>>>> 1b9f87d (Adding logs to new main code and backgrounds)
 
+<<<<<<< HEAD:leap_frog.py
 class LilyPad(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         super().__init__()
@@ -548,6 +564,8 @@ player = Player(Player.frog_position[0], Player.frog_position[1])
 
 >>>>>>> 675536f (Adding more logs)
 
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 class Health_bar:
     def __init__(self, player, screen):
         self.player = player
@@ -559,8 +577,11 @@ class Health_bar:
 
 <<<<<<< HEAD
 
+<<<<<<< HEAD:leap_frog.py
 =======
 >>>>>>> 675536f (Adding more logs)
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
     def draw_health_bars(self):
         pygame.draw.rect(self.screen, (255, 0, 0),
                          (self.health_bar_x, self.health_bar_y, self.health_bar_width, self.health_bar_height))  # Background bar
@@ -604,6 +625,9 @@ class Health_bar:
         self.draw_health_bars()
 
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 class Caves(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, image_path,scale_x, scale_y):
         super().__init__()
@@ -640,9 +664,12 @@ class Caves(pygame.sprite.Sprite):
     
 
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
 =======
 
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 class CaveFrog(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y):
         super().__init__()
@@ -656,9 +683,13 @@ class CaveFrog(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
 
+<<<<<<< HEAD:leap_frog.py
 
 <<<<<<< HEAD:leap_frog.py
 # Initialize objects
+=======
+ # Initialize objects
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 new_level = New_level(-10, -70)
 =======
  # Initialize objects
@@ -710,18 +741,18 @@ player_sprites.add(player)
 background_sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
 =======
 
-
 cave1 = Caves(-90, -20, 'Images/minicave.png',420,420)
 cave2 = Caves(50, -20, 'Images/minicave.png',420,420)
 cave3 = Caves(170, -20, 'Images/minicave.png',420,420)
 cave4 = Caves(300, -55, 'Images/main cave.png',600, 320) 
 
-cave_frog1= CaveFrog(103,180)
+cave_frog1= CaveFrog(88,180)
 cave_frog2 = CaveFrog(217,180)
 cave_frog3= CaveFrog(345,180)
-cave_frog4 = CaveFrog(200,180)
+cave_frog4 = CaveFrog(600,150)
 
 
+<<<<<<< HEAD
 
 # Create sprite groups with order of apperance 
 <<<<<<< HEAD
@@ -748,12 +779,15 @@ sprites = pygame.sprite.Group() #Create Sprites Group
 #all_sprites.add(player, alligators_group, cave1,cave2,cave3)
 >>>>>>> 8c91984 (add caves, add collision detection frog/caves)
 
+=======
+>>>>>>> 0aa13e0 (adding cave 4)
 background_sprites = pygame.sprite.LayeredUpdates()
-background_sprites.add(background_sprites, cars)  # Background sprites should be drawn first
+background_sprites.add(background_sprites, cars) 
 
 player_sprites = pygame.sprite.LayeredUpdates()
 player_sprites.add(player) 
 
+<<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
 alligators_group = pygame.sprite.Group()
 >>>>>>> 856efea (Removed logs from first screen.):car moving1.py
@@ -762,6 +796,10 @@ alligators_group = pygame.sprite.Group()
 
 car_sprites = pygame.sprite.LayeredUpdates()
 car_sprites.add(cars)
+=======
+car_sprites = pygame.sprite.LayeredUpdates()
+car_sprites.add(cars)  
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 
 lake_sprites = pygame.sprite.LayeredUpdates()
 <<<<<<< HEAD:leap_frog.py
@@ -835,10 +873,16 @@ sprites.add(player) #Add player last to keep on top
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+cave_fro_sprites = pygame.sprite.LayeredUpdates()
+
 all_sprites = pygame.sprite.LayeredUpdates()
 all_sprites.add(background_sprites,car_sprites,player_sprites)
 
+<<<<<<< HEAD:leap_frog.py
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
+=======
+#cave_fro_sprites.add(player, background_sprites,cave_frog1,cave_frog2,cave_frog3,cave_frog4)
+>>>>>>> ce4576c (adding cave 4):car moving1.py
 
 scroll_x = 0
 scroll_y = 0
@@ -852,6 +896,9 @@ while running:
             running = False
 
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
     player.update()
 
     keys = pygame.key.get_pressed()
@@ -907,6 +954,7 @@ while running:
 
       # Check for collision between player and new_level
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
     if pygame.sprite.collide_mask(player, new_level):
         current_level = 2
         player.reset_pos()
@@ -916,6 +964,11 @@ while running:
         player.reset_pos()
         #all_sprites.update()
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
+=======
+    if pygame.sprite.collide_mask(player, new_level):
+        player.reset_pos()
+      
+>>>>>>> ce4576c (adding cave 4):car moving1.py
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
@@ -951,6 +1004,7 @@ while running:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         lilypads=LilyPad(300,500) #creating lilypads in it's positions
         all_sprites.add(background_sprites, player_sprites, alligators_sprites,lilypads)
 =======
@@ -971,8 +1025,10 @@ while running:
         all_sprites.add(background_sprites, alligator, log1, log2, log3, player)
 #        sprites.add(player)
 #        all_sprites.add(player)
+=======
+>>>>>>> 0aa13e0 (adding cave 4)
 
-        all_sprites.add(player, alligators_sprites,cave2, cave4,cave1,cave3)
+        all_sprites.add( alligator, log1, log2, log3, cave4,cave1,cave2,cave3, player)
 
 >>>>>>> 8c91984 (add caves, add collision detection frog/caves)
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
@@ -1000,6 +1056,7 @@ while running:
             alligators.append(alligator)
 <<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
+<<<<<<< HEAD:leap_frog.py
 
             all_sprites.add(alligator)
 <<<<<<< HEAD:leap_frog.py
@@ -1015,6 +1072,9 @@ while running:
 >>>>>>> 1d9bfbf (Adding logs to new main code and backgrounds):car moving1.py
 =======
 #           sprites.add(alligator)
+=======
+
+>>>>>>> ce4576c (adding cave 4):car moving1.py
             all_sprites.add(alligator)
 
     
@@ -1033,7 +1093,6 @@ while running:
 
     if len(alligators_hit) == 0 or pygame.sprite.collide_mask(log, player):
         player_colliding_with_alligator = False
-
 
     # Check for collision between player and logs
     for log in log1, log2, log3:
@@ -1065,6 +1124,7 @@ while running:
         
 =======
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
@@ -1094,7 +1154,10 @@ while running:
     if pygame.sprite.collide_mask(player, cave1): 
 =======
 =======
+=======
+>>>>>>> 0aa13e0 (adding cave 4)
     #check for collision between player and caves
+<<<<<<< HEAD:leap_frog.py
     if pygame.sprite.collide_mask(player, cave1): 
 #       sprites.add(cave_frog1)
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
@@ -1174,18 +1237,32 @@ while running:
         all_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
         cave_frog2.image.set_colorkey((0, 0, 0)) 
+=======
+    if player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave1) :
+         
 
+            all_sprites.add(cave_frog1)
+            player.reset_pos()
+            cave_frog1.image.set_colorkey((0, 0, 0))  
+  
 
-    elif pygame.sprite.collide_mask(player, cave3):
-#       sprites.add(cave_frog3)
-       all_sprites.add(cave_frog3)
+    elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave2): 
+>>>>>>> ce4576c (adding cave 4):car moving1.py
+
+            all_sprites.add(cave_frog2)
+            player.reset_pos()  # Reset the player's position
+            cave_frog2.image.set_colorkey((0, 0, 0)) 
+
+    elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave3):
+
+            all_sprites.add(cave_frog3)
+            player.reset_pos()  # Reset the player's position
+            cave_frog3.image.set_colorkey((0, 0, 0)) 
+
+    elif player.rect.colliderect(new_level.rect) and pygame.sprite.collide_mask(player, cave4):
+       all_sprites.add(cave_frog4)
        player.reset_pos()  # Reset the player's position
-       cave_frog3.image.set_colorkey((0, 0, 0)) 
-
-#    elif pygame.sprite.collide_mask(player, cave4):
-#       all_sprites.add(cave_frog4)
-#      player.reset_pos()  # Reset the player's position
-#       cave_frog4.image.set_colorkey((0, 0, 0)) 
+       cave_frog4.image.set_colorkey((0, 0, 0)) 
 
 <<<<<<< HEAD
 >>>>>>> 8c91984 (add caves, add collision detection frog/caves)
@@ -1196,7 +1273,9 @@ while running:
 
     lake_sprites.draw(screen)
     
-
+    cave_fro_sprites.draw(screen)
+    cave_fro_sprites.update(screen)
+    
     all_sprites.draw(screen)
 
     all_sprites.update()
@@ -1214,8 +1293,11 @@ while running:
     pygame.display.flip()
     clock.tick(60)
 
+<<<<<<< HEAD:leap_frog.py
 mixer.music.stop()
 
 pygame.quit()
 sys.exit()
 
+=======
+>>>>>>> ce4576c (adding cave 4):car moving1.py
