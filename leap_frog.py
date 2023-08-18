@@ -910,7 +910,7 @@ alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites,car_sprites, log_sprites, player_sprites)
+all_sprites.add(background_sprites,car_sprites, player_sprites)
 
 <<<<<<< HEAD:leap_frog.py
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
@@ -1045,6 +1045,7 @@ while running:
 =======
     if pygame.sprite.collide_mask(player, new_level):
         player.reset_pos()
+<<<<<<< HEAD
       
 >>>>>>> ce4576c (adding cave 4):car moving1.py
         new_level.kill()
@@ -1107,6 +1108,16 @@ while running:
 >>>>>>> 0aa13e0 (adding cave 4)
 
         all_sprites.add( alligator, log1, log2, log3, cave4,cave1,cave2,cave3, player)
+=======
+        all_sprites.update()
+        new_level.kill()
+        lake = Lake(-2, 255)  # Create the Lake and its position x, y
+        lake_sprites.add(lake)  # Add lake
+        all_sprites.add(background_sprites, alligator, log_sprites)
+        #all_sprites.add(player_sprites)
+
+        all_sprites.add(alligators_sprites, cave1,cave2,cave3)
+>>>>>>> a85e74e (Corrected logs / frogs - now working as intended)
 
 >>>>>>> 8c91984 (add caves, add collision detection frog/caves)
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
@@ -1363,6 +1374,7 @@ while running:
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
+<<<<<<< HEAD
     
     cave_fro_sprites.draw(screen)
     cave_fro_sprites.update(screen)
@@ -1372,6 +1384,11 @@ while running:
     all_sprites.update()
 
     all_sprites.draw(screen)
+=======
+    all_sprites.draw(screen)
+    player_sprites.draw(screen)
+    all_sprites.update()
+>>>>>>> a85e74e (Corrected logs / frogs - now working as intended)
 
     health_bar.update()
 
