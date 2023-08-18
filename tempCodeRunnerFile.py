@@ -1,1 +1,0 @@
-all_sprites.add(cave_frog_sprite)
