@@ -1,6 +1,7 @@
 import pygame
 from pygame import mixer
 <<<<<<< HEAD
+<<<<<<< HEAD
 pygame.init()
 pygame.mixer.init()
 
@@ -12,6 +13,8 @@ screen_width = 1080
 screen_height = 720
 =======
 import subprocess #allows you to run other Python scripts. Needed to link to game when you click start button.
+=======
+>>>>>>> 4e2ed1f (menu changes)
 pygame.init()
 pygame.mixer.init()
 
@@ -116,6 +119,7 @@ def handle_button_click(mouse_pos):
         stop_Music()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         # START GAME HERE
         return 1
     
@@ -125,6 +129,10 @@ def handle_button_click(mouse_pos):
     if is_mouse_over_quit_button_x and is_mouse_over_quit_button_y:
 =======
         subprocess.Popen(["python3", "car moving1.py"])
+=======
+        # START GAME HERE
+        return 1
+>>>>>>> 4e2ed1f (menu changes)
 
         # switch to the gameplay screen
         run_gameplay_screen()
@@ -189,6 +197,7 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # Left mouse button
 <<<<<<< HEAD
+<<<<<<< HEAD
                     user_choice = handle_button_click(pygame.mouse.get_pos())
                     if(user_choice == 1):
                         # User has pressed Start, start game
@@ -196,6 +205,11 @@ def main():
 =======
                     handle_button_click(pygame.mouse.get_pos())
 >>>>>>> bbaad14 (adding menu)
+=======
+                    user_choice = handle_button_click(pygame.mouse.get_pos())
+                    if(user_choice == 1):
+                        return
+>>>>>>> 4e2ed1f (menu changes)
         draw_menu() #Puts background and text together
 
         pygame.display.flip()  # Update the display
