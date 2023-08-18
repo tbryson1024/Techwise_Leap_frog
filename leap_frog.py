@@ -28,17 +28,12 @@ BG_SWAMP_SIZE = 1080
 current_background = pygame.image.load('Images/road2.jpg').convert()
 current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-mixer.music.load("Images/Swamps Nature.wav")
-mixer.music.play(-1)  
-#mixer.music.load("Images/Swamps Nature.wav")
-#mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
-#mixer.music.play(-1)  # play non-stop
-
 
 road_sound = mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
 mixer.music.play()
 #swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
 #dead_sound = mixer.music.load("Images/mixkit-futuristic-electronic-engine-fail-2941.wav")
+
 #mixer.music.play(1)  # play non-stop
 
 class Player(pygame.sprite.Sprite):
@@ -546,21 +541,28 @@ while running:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     player.update()
 =======
 =======
 
 >>>>>>> 0823d0d (adding leap_frog.py)
+=======
+>>>>>>> 6ce169e (adding leap_frog.py)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
 <<<<<<< HEAD
+<<<<<<< HEAD
         player.move_right()
         
 =======
         player.move_right
+=======
+        player.move_right()
+>>>>>>> 6ce169e (adding leap_frog.py)
 
 >>>>>>> 0823d0d (adding leap_frog.py)
     elif keys[pygame.K_LEFT]:
@@ -568,22 +570,23 @@ while running:
         Jump_sound.play()
         player.animate()
         player.move_left()
-       
+
     elif keys[pygame.K_UP]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_up()
-        
+
     elif keys[pygame.K_DOWN]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_down()
-       
+
 
     if player.frog_position[0] >= BG_ROAD_SIZE:
        current_background = swamp_bg
+<<<<<<< HEAD
        
 
     
@@ -591,6 +594,8 @@ while running:
 <<<<<<< HEAD
 >>>>>>> 33ff7ab (add sounds to different levels)
 =======
+=======
+>>>>>>> 6ce169e (adding leap_frog.py)
 
 >>>>>>> 0823d0d (adding leap_frog.py)
 
@@ -605,9 +610,12 @@ while running:
                 elif player.health == 0 and player.lives == 0:
                     player.alive = False
 
+<<<<<<< HEAD
         
 
     
+=======
+>>>>>>> 6ce169e (adding leap_frog.py)
       # Check for collision between player and new_level
     if pygame.sprite.collide_mask(player, new_level):
         player.reset_pos()
@@ -655,6 +663,7 @@ while running:
         current_background = pygame.image.load('Images/bg1.png').convert()
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
         player.reset_player()
@@ -674,6 +683,9 @@ while running:
 >>>>>>> 33ff7ab (add sounds to different levels)
 =======
 >>>>>>> 0823d0d (adding leap_frog.py)
+=======
+
+>>>>>>> 6ce169e (adding leap_frog.py)
         alligators = []
         num_alligators = 4
 
@@ -780,6 +792,12 @@ while running:
 
     health_bar.update()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+    pygame.display.flip()
+    clock.tick(60)
+>>>>>>> 6ce169e (adding leap_frog.py)
 
  #   cave_sprites.update()
 =======
