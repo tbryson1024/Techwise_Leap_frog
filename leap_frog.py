@@ -318,6 +318,7 @@ for i in range(4):
     cars.add(car)
 
 
+
 class New_level(pygame.sprite.Sprite): # snippet of image on top of screen taking player to second background
     def __init__(self, pos_x, pos_y):
         super().__init__()
@@ -674,8 +675,12 @@ class CaveFrog(pygame.sprite.Sprite):
 new_level = New_level(-10, -70)
 =======
  # Initialize objects
+<<<<<<< HEAD:leap_frog.py
 new_level = New_level(0, 0)
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
+=======
+new_level = New_level(-10, -70)
+>>>>>>> 5167da6 (fix frog/cave collision):car moving1.py
 lake = Lake(-2, 255)
 
 alligator = Gator(100, 500)
@@ -718,9 +723,10 @@ player_sprites.add(player)
 background_sprites.add(background_sprites,cars, new_level)  # Background sprites should be drawn first
 =======
 
-cave1 = Caves(170, -8)
-cave2 = Caves(50, -8)
-cave3 = Caves(-70,-8)
+cave1 = Caves(-70,-8)
+cave2 = Caves(50,-8)
+cave3 = Caves(170, -8)
+
 cave_frog1= CaveFrog(103,180)
 cave_frog2 = CaveFrog(217,180)
 cave_frog3= CaveFrog(345,180)
@@ -753,7 +759,7 @@ sprites = pygame.sprite.Group() #Create Sprites Group
 >>>>>>> 8c91984 (add caves, add collision detection frog/caves)
 
 background_sprites = pygame.sprite.LayeredUpdates()
-background_sprites.add(background_sprites, cars, new_level)  # Background sprites should be drawn first
+background_sprites.add(background_sprites, cars)  # Background sprites should be drawn first
 
 player_sprites = pygame.sprite.LayeredUpdates()
 player_sprites.add(player) 
@@ -1099,7 +1105,7 @@ while running:
 =======
 =======
     #check for collision between player and caves
-    if pygame.sprite.collide_mask(player, log1): # colliding with logs for test purposes, supposed to be cave1
+    if pygame.sprite.collide_mask(player, cave1): 
 #       sprites.add(cave_frog1)
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
        all_sprites.add(cave_frog1)
@@ -1107,6 +1113,7 @@ while running:
        cave_frog1.image.set_colorkey((0, 0, 0))  
   
 
+<<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
     elif pygame.sprite.collide_mask(player, cave2): 
         all_sprites.add(cave_frog2)
@@ -1170,13 +1177,16 @@ while running:
 >>>>>>> 856efea (Removed logs from first screen.):car moving1.py
 =======
     elif pygame.sprite.collide_mask(player, log2): #colliding with logs for test purposes, it is supposed to be cave2
+=======
+    elif pygame.sprite.collide_mask(player, cave2): 
+>>>>>>> 5167da6 (fix frog/cave collision):car moving1.py
 #        sprites.add(cave_frog2)
         all_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
         cave_frog2.image.set_colorkey((0, 0, 0)) 
 
 
-    elif pygame.sprite.collide_mask(player, log3):
+    elif pygame.sprite.collide_mask(player, cave3):
 #       sprites.add(cave_frog3)
        all_sprites.add(cave_frog3)
        player.reset_pos()  # Reset the player's position
