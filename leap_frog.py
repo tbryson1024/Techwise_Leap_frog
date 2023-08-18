@@ -49,17 +49,12 @@ current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, S
 <<<<<<< HEAD:leap_frog.py
 
 
-mixer.music.load("Images/Swamps Nature.wav")
-mixer.music.play(-1)  
-#mixer.music.load("Images/Swamps Nature.wav")
-#mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
-#mixer.music.play(-1)  # play non-stop
-
 
 road_sound = mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
 mixer.music.play()
 #swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
 #dead_sound = mixer.music.load("Images/mixkit-futuristic-electronic-engine-fail-2941.wav")
+
 #mixer.music.play(1)  # play non-stop
 
 <<<<<<< HEAD
@@ -958,25 +953,35 @@ while running:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 35d6b74 (add sounds to different levels):car moving1.py
 =======
 <<<<<<< HEAD
 >>>>>>> 40ede70 (adding leap_frog.py)
+=======
+<<<<<<< HEAD
+>>>>>>> 2ccb3e7 (adding leap_frog.py)
     player.update()
 =======
 =======
 
 >>>>>>> 0823d0d (adding leap_frog.py)
+=======
+>>>>>>> 6ce169e (adding leap_frog.py)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
 <<<<<<< HEAD
+<<<<<<< HEAD
         player.move_right()
         
 =======
         player.move_right
+=======
+        player.move_right()
+>>>>>>> 6ce169e (adding leap_frog.py)
 
 >>>>>>> 0823d0d (adding leap_frog.py)
     elif keys[pygame.K_LEFT]:
@@ -984,22 +989,23 @@ while running:
         Jump_sound.play()
         player.animate()
         player.move_left()
-       
+
     elif keys[pygame.K_UP]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_up()
-        
+
     elif keys[pygame.K_DOWN]:
         Jump_sound = mixer.Sound("Images/jump.wav")
         Jump_sound.play()
         player.animate()
         player.move_down()
-       
+
 
     if player.frog_position[0] >= BG_ROAD_SIZE:
        current_background = swamp_bg
+<<<<<<< HEAD
        
 
     
@@ -1007,6 +1013,8 @@ while running:
 <<<<<<< HEAD
 >>>>>>> 33ff7ab (add sounds to different levels)
 =======
+=======
+>>>>>>> 6ce169e (adding leap_frog.py)
 
 >>>>>>> 0823d0d (adding leap_frog.py)
 
@@ -1055,6 +1063,7 @@ while running:
     for car in cars:
         if pygame.sprite.collide_mask(player, car):
 
+<<<<<<< HEAD
 <<<<<<< HEAD:leap_frog.py
             if player.health == 0 and player.lives > 0:
                 player.lives -= 1
@@ -1067,6 +1076,14 @@ while running:
 
     
 >>>>>>> 35d6b74 (add sounds to different levels):car moving1.py
+=======
+<<<<<<< HEAD
+        
+
+    
+=======
+>>>>>>> 6ce169e (adding leap_frog.py)
+>>>>>>> 2ccb3e7 (adding leap_frog.py)
       # Check for collision between player and new_level
 <<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
@@ -1169,6 +1186,7 @@ while running:
         
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
         player.reset_player()
@@ -1201,7 +1219,13 @@ while running:
 >>>>>>> 33ff7ab (add sounds to different levels)
 =======
 >>>>>>> 0823d0d (adding leap_frog.py)
+<<<<<<< HEAD
 >>>>>>> 40ede70 (adding leap_frog.py)
+=======
+=======
+
+>>>>>>> 6ce169e (adding leap_frog.py)
+>>>>>>> 2ccb3e7 (adding leap_frog.py)
         alligators = []
         num_alligators = 4
 
@@ -1449,6 +1473,12 @@ while running:
 
     health_bar.update()
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+    pygame.display.flip()
+    clock.tick(60)
+>>>>>>> 6ce169e (adding leap_frog.py)
 
 <<<<<<< HEAD:leap_frog.py
 
