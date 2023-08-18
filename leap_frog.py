@@ -496,12 +496,6 @@ class Log(pygame.sprite.Sprite):
         elif self.speed < 0 and self.rect.right < 0:
             self.reset_position()
 
-        """ # Check for collision between player and logs
-        if self.player is not None:  # Check if the player is set
-            player_on_log = pygame.sprite.collide_mask(self.player, self)
-            if player_on_log:
-                self.player.move(self.speed, 0) """
-
     def reset_position(self):
         if self.speed > 0:
             self.rect.right = 0
@@ -515,15 +509,16 @@ class Log(pygame.sprite.Sprite):
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
     
-log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
-
 player = Player(Player.frog_position[0], Player.frog_position[1])
-log1.set_player(player)
+""" log1.set_player(player)
 log2.set_player(player)
+<<<<<<< HEAD
 log3.set_player(player)
 >>>>>>> 1b9f87d (Adding logs to new main code and backgrounds)
+=======
+log3.set_player(player) """
+
+>>>>>>> 33821d4 (Saving changes)
 
 <<<<<<< HEAD:leap_frog.py
 class LilyPad(pygame.sprite.Sprite):
@@ -827,6 +822,7 @@ car_sprites.add(cars)
 >>>>>>> ce4576c (adding cave 4):car moving1.py
 
 lake_sprites = pygame.sprite.LayeredUpdates()
+<<<<<<< HEAD
 <<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD
@@ -897,6 +893,11 @@ sprites.add(player) #Add player last to keep on top
 
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
+=======
+log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
+>>>>>>> 646d051 (Saving changes)
 
 <<<<<<< HEAD
 cave_fro_sprites = pygame.sprite.LayeredUpdates()
@@ -905,8 +906,11 @@ log_sprites = pygame.sprite.LayeredUpdates()
 log_sprites.add(log1, log2, log3)
 >>>>>>> 1f515aa (Got frog on top of logs, now have to remove from screen 1 again.)
 
+alligators_sprites = pygame.sprite.LayeredUpdates()
+alligators_sprites.add(alligator)
+
 all_sprites = pygame.sprite.LayeredUpdates()
-all_sprites.add(background_sprites,car_sprites,log_sprites, player_sprites)
+all_sprites.add(background_sprites,car_sprites, log_sprites, player_sprites)
 
 <<<<<<< HEAD:leap_frog.py
 >>>>>>> deb5e7c (add caves, add collision detection frog/caves):car moving1.py
