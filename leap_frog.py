@@ -499,7 +499,11 @@ class Log(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = pos_x
         self.rect.y = pos_y
+<<<<<<< HEAD
         self.speed = random.randrange(1,4)  
+=======
+        self.speed = speed
+>>>>>>> f6467cc (Added more logs)
         self.player = None  # Player attribute
         self.image = pygame.transform.scale(self.image, (150, 75))
         self.image.set_colorkey((0, 0, 0))
@@ -859,6 +863,7 @@ lake_sprites = pygame.sprite.LayeredUpdates()
 <<<<<<< HEAD:leap_frog.py
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 lilypad_sprites = pygame.sprite.LayeredUpdates()
 
 
@@ -933,13 +938,28 @@ log1 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490),
 log2 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
 log3 = Log("Images/log.png", random.randint(100, 300), random.randint(300, 490), random.randint(5, 10))
 >>>>>>> 646d051 (Saving changes)
+=======
+log1 = Log("Images/log.png", 200, 230, 5)
+log2 = Log("Images/log.png", 250, 290, -5)
+log3 = Log("Images/log.png", 500, 380, 5)
+log4 = Log("Images/log.png", 650, 470, -5)
+log5 = Log("Images/log.png", 730, 525, 5)
+log6 = Log("Images/log.png", 850, 600, -5)
+log7 = Log("Images/log.png", 500, 250,  5)
+log8 = Log("Images/log.png", 730, 150, -5)
+
+>>>>>>> 3050bc8 (Added more logs)
 
 <<<<<<< HEAD
 cave_fro_sprites = pygame.sprite.LayeredUpdates()
 =======
 log_sprites = pygame.sprite.LayeredUpdates()
+<<<<<<< HEAD
 log_sprites.add(log1, log2, log3)
 >>>>>>> 1f515aa (Got frog on top of logs, now have to remove from screen 1 again.)
+=======
+log_sprites.add(log1, log2, log3, log4, log5, log6, log7, log8)
+>>>>>>> f6467cc (Added more logs)
 
 
 alligators_sprites = pygame.sprite.LayeredUpdates()
@@ -961,8 +981,6 @@ cave2 = Caves(50, -20, 'Images/minicave.png',420,420)
 cave3 = Caves(170, -20, 'Images/minicave.png',420,420)
 cave4 = Caves(300, -55, 'Images/main cave.png',600, 320)
 cave_sprites = pygame.sprite.LayeredUpdates()
-
-
 
 cave_frog1= CaveFrog(88,180)
 cave_frog2 = CaveFrog(217,180)
@@ -1387,7 +1405,7 @@ while running:
         player_colliding_with_alligator = False
 
     # Check for collision between player and logs
-    for log in log1, log2, log3:
+    for log in log_sprites:
         if pygame.sprite.collide_mask(log, player):
             log.carry_player(player)
 
