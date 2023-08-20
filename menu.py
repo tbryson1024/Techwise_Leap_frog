@@ -7,8 +7,8 @@ pygame.mixer.music.load("sounds/birds.mp3")
 pygame.mixer.music.play()
 pygame.mixer.music.set_volume(0.5)
 
-screen_width = 800
-screen_height = 600
+screen_width = 1080
+screen_height = 720
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Menu Screen")
 
@@ -24,7 +24,7 @@ def stop_Music():
 # Function to draw the menu with the buttons
 def draw_menu():
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-    text = font.render("Frogger", True, BLACK)  # Black text
+    text = font.render("Leap Frog", True, BLACK)  # Black text
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
 
     # Draw the start button
