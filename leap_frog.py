@@ -609,7 +609,7 @@ while running:
             player.alive = False
             player_colliding_with_alligator = True
 
-    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(log, player):
+    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(Log, player):
         player_colliding_with_alligator = False
 
     # Check for collision between player and logs
