@@ -7,9 +7,7 @@ import menu
 menu.main()
 
 pygame.init()
-
 pygame.mixer.init()
-
 clock = pygame.time.Clock()
 
 
@@ -499,7 +497,9 @@ scroll_x = 0
 scroll_y = 0
 
 
+
 # Main Game loop #
+
 
 running = True
 while running:
@@ -618,7 +618,7 @@ while running:
             player.alive = False
             player_colliding_with_alligator = True
 
-    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(log, player):
+    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(Log, player):
         player_colliding_with_alligator = False
 
     # Check for collision between player and logs
@@ -626,7 +626,6 @@ while running:
         for log in log_sprites:
             if pygame.sprite.collide_mask(log, player):
                 log.carry_player(player)
-
 
     # Check for collision between player and caves
 
@@ -671,6 +670,8 @@ while running:
 
 
 
+mixer.music.stop()
 pygame.quit()
-sys.exit()
+
+
 
