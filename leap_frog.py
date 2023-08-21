@@ -461,12 +461,12 @@ car_sprites.add(cars)
 lake_sprites = pygame.sprite.LayeredUpdates()
 
 log1 = Log("Images/log.png", 200, 250, 5)
-log2 = Log("Images/log.png", 300, 500, 5)
-log3 = Log("Images/log.png", 400, 350, -5)
+log2 = Log("Images/log.png", 200, 500, -5)
+log3 = Log("Images/log.png", 400, 350, 5)
 log4 = Log("Images/log.png", 500, 550, -5)
 log5 = Log("Images/log.png", 600, 400, 5)
-log6 = Log("Images/log.png", 700, 300, 5)
-log7 = Log("Images/log.png", 800, 600, -5)
+log6 = Log("Images/log.png", 700, 300, -5)
+log7 = Log("Images/log.png", 800, 600, 5)
 log8 = Log("Images/log.png", 900, 450, -5)
 
 log_sprites = pygame.sprite.LayeredUpdates()
@@ -618,7 +618,7 @@ while running:
             player.alive = False
             player_colliding_with_alligator = True
 
-    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(Log, player):
+    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(log, player):
         player_colliding_with_alligator = False
 
     # Check for collision between player and logs
