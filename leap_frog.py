@@ -541,11 +541,6 @@ while running:
     # Check for collision between player and cars
     for car in cars:
         if pygame.sprite.collide_mask(player, car):
-            if player.health == 0 and player.lives > 0:
-                player.lives -= 1
-                player.health = 100
-            elif player.health == 0 and player.lives == 0:
-                player.alive = False
                 player.health -= 10 # Reduce player's health by
                 if player.health == 0 and player.lives > 0:
                     player.lives -= 1
