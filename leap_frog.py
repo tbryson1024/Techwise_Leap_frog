@@ -8,6 +8,7 @@ menu.main()
 
 pygame.init()
 pygame.mixer.init()
+
 clock = pygame.time.Clock()
 
 current_level = 1
@@ -135,7 +136,7 @@ class Player(pygame.sprite.Sprite):
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
-
+      
     def reset_player(self):
         self.direction = "up"
         self.health = 100
@@ -164,7 +165,6 @@ class Car(pygame.sprite.Sprite):
         elif self.speed < 0 and self.rect.right < 0:
             self.reset_position()
 
-
     def reset_position(self):
         if self.speed > 0:
             self.rect.right = 0
@@ -189,7 +189,7 @@ for i in range(3):
 #    pos_x = -random.randint(200, 450)  # Starting offscreen from the left
     pos_x = SCREEN_WIDTH + random.randint(100, 460)
     pos_y = 90 + i * 135  # Adjust the spacing between cars
-    speed = random.randint(7, 14)  # Random speed
+    speed = random.randint(7, 14)  # Random speed 
     car = Car(image_path, pos_x, pos_y, speed)
     car.image = pygame.image.load(image_path).convert()  # Load the image
     car.image.set_colorkey((0, 0, 0))  # Remove the black background
@@ -201,7 +201,7 @@ for i in range(4):
     image_path = car_images_left[i]
     pos_x = SCREEN_WIDTH + random.randint(120, 470)  # Starting offscreen from the right
     pos_y = 210 + i * 120  # Adjust the spacing between cars
-    speed = -random.randint(9, 12)  # Random  speed
+    speed = -random.randint(9, 12)  # Random  speed 
     car = Car(image_path, pos_x, pos_y, speed)
     car.image = pygame.image.load(image_path).convert()  # Load the image
     car.image.set_colorkey((0, 0, 0))  # Remove the black background
@@ -254,7 +254,6 @@ class Gator(pygame.sprite.Sprite):
         self.sprites.append(pygame.image.load('Images/gator-left2.png').convert())
         self.sprites.append(pygame.image.load('Images/gator-left3.png').convert())
         self.sprites.append(pygame.image.load('Images/gator-left4.png').convert())
-
         # Set color to be removed for each loaded image
         for i in range(len(self.sprites)):
             self.sprites[i].set_colorkey((255, 255, 255))
@@ -292,9 +291,27 @@ class Gator(pygame.sprite.Sprite):
             if self.rect.right > SCREEN_WIDTH:
                 self.kill()
 
-
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
+
+
+
+class LilyPad(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y):
+        super().__init__()
+        self.image = pygame.image.load('Images/LilyPad.png').convert_alpha()
+        self.image = pygame.transform.scale(self.image, (80, 80))
+        self.rect = self.image.get_rect()
+        self.rect.x = pos_x
+        self.rect.y = pos_y
+        self.animation_timer = 0
+        self.animation_speed = 5
+
+    def update(self):
+        self.animation_timer += 1
+        if self.animation_timer > self.animation_speed:
+            self.animation_timer = 0
+            self.rect.y += random.uniform(-1, 1)
 
 
 class Log(pygame.sprite.Sprite):
@@ -332,7 +349,7 @@ class Log(pygame.sprite.Sprite):
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
-
+    
 player = Player(Player.frog_position[0], Player.frog_position[1])
 
 
@@ -375,8 +392,6 @@ class Health_bar:
                player.frog_position = [500, 675]  # Reset the player's position
                player.rect.topleft = player.frog_position
                player.direction = "up"
-               #Clear the cave frog
-            cave_frog_sprites.empty()
 
         #Print Lives to screen
         font = pygame.font.Font('freesansbold.ttf', 30)
@@ -422,9 +437,24 @@ new_level = New_level(-10, -70)
 lake = Lake(-2, 255)
 
 alligator = Gator(100, 500)
-
 health_bar = Health_bar(player, screen)
 
+lilypads = LilyPad (100,200)
+
+# Create sprite groups with order of apperance 
+
+sprites = pygame.sprite.Group() #Create Sprites Group
+
+background_sprites = pygame.sprite.LayeredUpdates()
+background_sprites.add(background_sprites, cars) 
+
+player_sprites = pygame.sprite.LayeredUpdates()
+player_sprites.add(player) 
+
+car_sprites = pygame.sprite.LayeredUpdates()
+car_sprites.add(cars)  
+
+health_bar = Health_bar(player, screen)
 
 background_sprites = pygame.sprite.LayeredUpdates()
 background_sprites.add(background_sprites, cars)
@@ -434,6 +464,7 @@ player_sprites.add(player)
 
 car_sprites = pygame.sprite.LayeredUpdates()
 car_sprites.add(cars)
+
 
 lake_sprites = pygame.sprite.LayeredUpdates()
 
@@ -446,13 +477,14 @@ log6 = Log("Images/log.png", 700, 300, 5)
 log7 = Log("Images/log.png", 800, 600, -5)
 log8 = Log("Images/log.png", 900, 450, -5)
 
-
 log_sprites = pygame.sprite.LayeredUpdates()
 log_sprites.add(log1, log2, log3, log4, log5, log6, log7, log8)
 
 
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
+
+cave_frog_sprites = pygame.sprite.LayeredUpdates()
 
 all_sprites = pygame.sprite.LayeredUpdates()
 all_sprites.add(background_sprites,car_sprites,player_sprites)
@@ -473,8 +505,7 @@ cave_frog_sprites = pygame.sprite.LayeredUpdates()
 scroll_x = 0
 scroll_y = 0
 
-
-#main Game loop
+# Main Game loop #
 running = True
 while running:
     for event in pygame.event.get():
@@ -482,6 +513,7 @@ while running:
             running = False
 
     player.update()
+
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         Jump_sound = mixer.Sound("Images/jump.wav")
@@ -511,7 +543,6 @@ while running:
        current_background = swamp_bg
 
 
-
     # Check for collision between player and cars
     for car in cars:
         if pygame.sprite.collide_mask(player, car):
@@ -522,13 +553,16 @@ while running:
                 elif player.health == 0 and player.lives == 0:
                     player.alive = False
 
+
       # Check for collision between player and new_level
     if pygame.sprite.collide_mask(player, new_level):
         current_level = 2
         player.reset_pos()
+        
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
+
         cave1 = Caves(-90, -20, 'Images/minicave.png',420,420)
         cave2 = Caves(50, -20, 'Images/minicave.png',420,420)
         cave3 = Caves(170, -20, 'Images/minicave.png',420,420)
@@ -552,7 +586,7 @@ while running:
         current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
         player.reset_player()
-
+        
         mixer.music.stop()
         swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
         mixer.music.play()
@@ -587,7 +621,17 @@ while running:
             if pygame.sprite.collide_mask(log, player):
                 log.carry_player(player)
 
-    #check for collision between player and caves
+
+    #lilypads = []
+    #num_lilypads = 4
+
+    #for lilypad in range(num_lilypads):
+        #lilypads = LilyPad(200, 400)
+        #lilypads.append(lilypads)
+        #all_sprites.add(lilypads)
+
+
+    # Check for collision between player and caves
     if current_level == 2 and pygame.sprite.collide_mask(player, cave1) :
         cave_frog_sprites.add(cave_frog1)
         player.reset_pos()
@@ -606,13 +650,16 @@ while running:
     elif current_level == 2 and pygame.sprite.collide_mask(player, cave4):
        cave_frog_sprites.add(cave_frog4)
        player.reset_pos()  # Reset the player's position
+
        cave_frog4.image.set_colorkey((0, 0, 0))
 
+        # Draw Screen
     screen.blit(current_background, (scroll_x, scroll_y))
 
 
     lake_sprites.draw(screen)
     all_sprites.draw(screen)
+
     player_sprites.draw(screen)
     all_sprites.update()
 
@@ -624,6 +671,8 @@ while running:
     pygame.display.flip()
     clock.tick(60)
 
+
 mixer.music.stop()
 pygame.quit()
 sys.exit()
+
