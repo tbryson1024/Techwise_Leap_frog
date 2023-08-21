@@ -3,30 +3,32 @@ from pygame import mixer
 pygame.init()
 pygame.mixer.init()
 
-pygame.mixer.music.load("sounds/birds.mp3")
+pygame.mixer.music.load("sounds/mixkit-completion-of-a-level-2063.wav")
 pygame.mixer.music.play()
-pygame.mixer.music.set_volume(0.5)
-
+pygame.mixer.music.set_volume(1)
 
 screen_width = 1080
 screen_height = 720
-
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Menu Screen")
+pygame.display.set_caption("Leap Frog")
 
 # Define colors
 GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
 # Stop music function
-def stop_Music():
+def stop_Music(): 
     pygame.mixer.music.stop()
 
 
 # Function to draw the menu with the buttons
 def draw_menu():
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-    text = font.render("Leap Frog", True, BLACK)  # Black text
+    text = font.render("Leap Frog Game Over", True, GREEN)  # Black text
+    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 100))
+
+    font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
+    text = font.render("New Levels and Features coming Spring 2024", True, GREEN)  # Black text
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
 
     # Draw the start button
@@ -44,6 +46,10 @@ def draw_menu():
     pygame.draw.rect(screen, BLACK, (quit_button_x, quit_button_y, quit_button_width, quit_button_height))
     quit_text = font.render("Quit", True, GREEN)
     screen.blit(quit_text, (quit_button_x + quit_button_width // 2 - quit_text.get_width() // 2, quit_button_y + quit_button_height // 2 - quit_text.get_height() // 2))
+
+    font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
+    text = font.render("Thanks for Playing the Game", True, GREEN)  # Black text
+    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 500))
 
     pygame.display.flip()  # Update the display
 
@@ -75,7 +81,7 @@ def handle_button_click(mouse_pos):
 
         # START GAME HERE
         return 1
-
+    
     is_mouse_over_quit_button_x = quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width
     is_mouse_over_quit_button_y = quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height
 
@@ -96,9 +102,9 @@ def run_gameplay_screen():
     return running
 
 def background_image():
-
+    
     # Load the background image
-    background_image = pygame.image.load('Images/menu-background2.jpg')
+    background_image = pygame.image.load('Images/end_screen_background.jpg') 
 
     # Get the size of the background image
     image_width, image_height = background_image.get_size()
@@ -141,6 +147,7 @@ def main():
 
     pygame.quit()
 
+    
 
 if __name__ == "__main__":
     main()

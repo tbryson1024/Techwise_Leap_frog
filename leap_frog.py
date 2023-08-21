@@ -7,7 +7,7 @@ import menu
 menu.main()
 
 pygame.init()
-pygame.mixer.init(devicename='directsound')
+pygame.mixer.init()
 clock = pygame.time.Clock()
 
 
@@ -142,7 +142,7 @@ class Player(pygame.sprite.Sprite):
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
-
+      
     def reset_player(self):
         self.direction = "up"
         self.health = 100
@@ -196,7 +196,7 @@ for i in range(3):
     image_path = car_images_right[i]
     pos_x = SCREEN_WIDTH + random.randint(100, 460)
     pos_y = 90 + i * 135  # Adjust the spacing between cars
-    speed = random.randint(7, 14)  # Random speed
+    speed = random.randint(7, 14)  # Random speed 
     car = Car(image_path, pos_x, pos_y, speed)
     car.image = pygame.image.load(image_path).convert()  # Load the image
     car.image.set_colorkey((0, 0, 0))  # Remove the black background
@@ -208,7 +208,7 @@ for i in range(4):
     image_path = car_images_left[i]
     pos_x = SCREEN_WIDTH + random.randint(120, 470)  # Starting offscreen from the right
     pos_y = 210 + i * 120  # Adjust the spacing between cars
-    speed = -random.randint(9, 12)  # Random  speed
+    speed = -random.randint(9, 12)  # Random  speed 
     car = Car(image_path, pos_x, pos_y, speed)
     car.image = pygame.image.load(image_path).convert()  # Load the image
     car.image.set_colorkey((0, 0, 0))  # Remove the black background
@@ -261,7 +261,6 @@ class Gator(pygame.sprite.Sprite):
         self.sprites.append(pygame.image.load('Images/gator-left2.png').convert())
         self.sprites.append(pygame.image.load('Images/gator-left3.png').convert())
         self.sprites.append(pygame.image.load('Images/gator-left4.png').convert())
-
         # Set color to be removed for each loaded image
         for i in range(len(self.sprites)):
             self.sprites[i].set_colorkey((255, 255, 255))
@@ -354,7 +353,7 @@ class Log(pygame.sprite.Sprite):
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
-
+    
 player = Player(Player.frog_position[0], Player.frog_position[1])
 
 
@@ -443,8 +442,12 @@ new_level = New_level(-10, -70)
 lake = Lake(-2, 255)
 
 alligator = Gator(100, 500)
-
 health_bar = Health_bar(player, screen)
+
+
+# Create sprite groups with order of apperance 
+
+sprites = pygame.sprite.Group() #Create Sprites Group
 
 background_sprites = pygame.sprite.LayeredUpdates()
 background_sprites.add(background_sprites, cars)
@@ -473,6 +476,8 @@ log_sprites.add(log1, log2, log3, log4, log5, log6, log7, log8)
 alligators_sprites = pygame.sprite.LayeredUpdates()
 alligators_sprites.add(alligator)
 
+cave_frog_sprites = pygame.sprite.LayeredUpdates()
+
 all_sprites = pygame.sprite.LayeredUpdates()
 all_sprites.add(background_sprites,car_sprites,player_sprites)
 
@@ -492,7 +497,9 @@ scroll_x = 0
 scroll_y = 0
 
 
- # Main Game loop #
+
+# Main Game loop #
+
 
 running = True
 while running:
@@ -501,6 +508,7 @@ while running:
             running = False
 
     player.update()
+
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         Jump_sound = mixer.Sound("Images/jump.wav")
@@ -550,6 +558,7 @@ while running:
     if pygame.sprite.collide_mask(player, new_level):
         current_level = 2
         player.reset_pos()
+        
         new_level.kill()
         lake = Lake(-2, 255)  # Create the Lake and its position x, y
         lake_sprites.add(lake)  # Add lake
@@ -618,7 +627,8 @@ while running:
             if pygame.sprite.collide_mask(log, player):
                 log.carry_player(player)
 
-       #check for collision between player and caves
+    # Check for collision between player and caves
+
     if current_level == 2 and pygame.sprite.collide_mask(player, cave1) :
         cave_frog_sprites.add(cave_frog1)
         player.reset_pos()
@@ -637,8 +647,10 @@ while running:
     elif current_level == 2 and pygame.sprite.collide_mask(player, cave4):
        cave_frog_sprites.add(cave_frog4)
        player.reset_pos()  # Reset the player's position
+
        cave_frog4.image.set_colorkey((0, 0, 0))
 
+        # Draw Screen
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
@@ -657,7 +669,9 @@ while running:
     clock.tick(60)
 
 
+
 mixer.music.stop()
 pygame.quit()
+
 
 
