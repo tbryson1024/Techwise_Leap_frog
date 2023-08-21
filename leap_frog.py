@@ -586,7 +586,7 @@ while running:
         cave_frog4 = CaveFrog(600,150)
         cave_frog_sprites = pygame.sprite.LayeredUpdates()
 
-        all_sprites.add(lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
+        all_sprites.add(lilypad_sprites, alligators_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -606,7 +606,7 @@ while running:
             alligators.append(alligator)
             all_sprites.add(alligator)
 
-    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False)
     player_colliding_with_alligator = False
 
     for gator in alligators_hit:
