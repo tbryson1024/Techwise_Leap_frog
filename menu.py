@@ -1,7 +1,5 @@
 import pygame
 from pygame import mixer
-<<<<<<< HEAD
-<<<<<<< HEAD
 pygame.init()
 pygame.mixer.init()
 
@@ -11,32 +9,6 @@ pygame.mixer.music.set_volume(0.5)
 
 screen_width = 1080
 screen_height = 720
-=======
-import subprocess #allows you to run other Python scripts. Needed to link to game when you click start button.
-=======
->>>>>>> 4e2ed1f (menu changes)
-pygame.init()
-pygame.mixer.init()
-
-pygame.mixer.music.load("sounds/birds.mp3")
-pygame.mixer.music.play()
-pygame.mixer.music.set_volume(0.5)
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-screen_width = 800
-screen_height = 600
->>>>>>> bbaad14 (adding menu)
-=======
-screen_width = 1080
-screen_height = 720
->>>>>>> ce4576c (adding cave 4)
-=======
-
-screen_width = 1080
-screen_height = 720
-
->>>>>>> 7873512 (Saving menu.py)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Menu Screen")
 
@@ -44,36 +16,15 @@ pygame.display.set_caption("Menu Screen")
 GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
 # Stop music function
 def stop_Music(): 
     pygame.mixer.music.stop()
 
-<<<<<<< HEAD
 
 # Function to draw the menu with the buttons
 def draw_menu():
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
     text = font.render("Leap Frog", True, BLACK)  # Black text
-=======
-#Background sound
-mixer.music.load('sounds/background.mp3')
-mixer.music.play()
-=======
->>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
-
-# Function to draw the menu with the buttons
-def draw_menu():
-    font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-<<<<<<< HEAD
-    text = font.render("Frogger", True, BLACK)  # Black text
->>>>>>> bbaad14 (adding menu)
-=======
-    text = font.render("Leap Frog", True, BLACK)  # Black text
->>>>>>> b885374 (add the fourth cave)
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
 
     # Draw the start button
@@ -99,8 +50,6 @@ def draw_gameplay_screen():
     screen.fill(BLACK)  # Fill the screen with black color
     pygame.display.flip()  # Update the display
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 # Function to handle button click events
 def handle_button_click(mouse_pos):
@@ -118,60 +67,17 @@ def handle_button_click(mouse_pos):
     is_mouse_over_start_button_y = start_button_y <= mouse_pos[1] <= start_button_y + start_button_height
 
     if is_mouse_over_start_button_x and is_mouse_over_start_button_y:
-=======
-=======
-
->>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
-# Function to handle button click events
-def handle_button_click(mouse_pos):
-    start_button_x = screen_width // 2 - 100
-    start_button_y = 300
-    start_button_width = 200
-    start_button_height = 50
-
-<<<<<<< HEAD
-    if start_button_x <= mouse_pos[0] <= start_button_x + start_button_width and start_button_y <= mouse_pos[1] <= start_button_y + start_button_height:
->>>>>>> bbaad14 (adding menu)
-=======
-    quit_button_x = screen_width // 2 - 100
-    quit_button_y = 400
-    quit_button_width = 200
-    quit_button_height = 50
-
-    is_mouse_over_start_button_x = start_button_x <= mouse_pos[0] <= start_button_x + start_button_width
-    is_mouse_over_start_button_y = start_button_y <= mouse_pos[1] <= start_button_y + start_button_height
-
-    if is_mouse_over_start_button_x and is_mouse_over_start_button_y:
->>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
         click_Sound = mixer.Sound('sounds/click.wav')
         click_Sound.play()
         stop_Music()
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         # START GAME HERE
         return 1
-
+    
     is_mouse_over_quit_button_x = quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width
     is_mouse_over_quit_button_y = quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height
-<<<<<<< HEAD
 
     if is_mouse_over_quit_button_x and is_mouse_over_quit_button_y:
-=======
-        subprocess.Popen(["python3", "car moving1.py"])
-=======
-        # START GAME HERE
-        return 1
->>>>>>> 4e2ed1f (menu changes)
-
-        # switch to the gameplay screen
-        run_gameplay_screen()
-    elif quit_button_x <= mouse_pos[0] <= quit_button_x + quit_button_width and quit_button_y <= mouse_pos[1] <= quit_button_y + quit_button_height:
->>>>>>> bbaad14 (adding menu)
-=======
-
-    if is_mouse_over_quit_button_x and is_mouse_over_quit_button_y:
->>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
         pygame.quit()
         quit()
 
@@ -188,7 +94,7 @@ def run_gameplay_screen():
     return running
 
 def background_image():
-
+    
     # Load the background image
     background_image = pygame.image.load('Images/menu-background2.jpg') 
 
@@ -205,16 +111,6 @@ def background_image():
     scaled_height = int(image_height * scale_factor)
     background_image = pygame.transform.scale(background_image, (scaled_width, scaled_height))
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    # Calculate the position to center the image
-    center_x = screen_width // 2 - scaled_width // 2
-    center_y = screen_height // 2 - scaled_height // 2
-
->>>>>>> bbaad14 (adding menu)
-=======
->>>>>>> 8757d75 (remove subprocess, update music, fix bugs)
     # Resize the background image to fit the screen
     background_image = pygame.transform.scale(background_image, (screen_width, screen_height))
 
@@ -233,28 +129,17 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:  # Left mouse button
-<<<<<<< HEAD
-<<<<<<< HEAD
                     user_choice = handle_button_click(pygame.mouse.get_pos())
                     if(user_choice == 1):
                         # User has pressed Start, start game
                         return
-=======
-                    handle_button_click(pygame.mouse.get_pos())
->>>>>>> bbaad14 (adding menu)
-=======
-                    user_choice = handle_button_click(pygame.mouse.get_pos())
-                    if(user_choice == 1):
-                        # User has pressed Start, start game
-                        return
->>>>>>> 4e2ed1f (menu changes)
         draw_menu() #Puts background and text together
 
         pygame.display.flip()  # Update the display
 
     pygame.quit()
 
+    
 
 if __name__ == "__main__":
     main()
-
