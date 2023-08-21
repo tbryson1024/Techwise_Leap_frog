@@ -14,7 +14,7 @@ pygame.display.set_caption("Leap Frog")
 
 # Define colors
 GREEN = (0, 255, 0)
-
+BLACK = (0, 0, 0)
 
 # Stop music function
 def stop_Music(): 
