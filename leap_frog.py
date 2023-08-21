@@ -37,6 +37,7 @@ current_background = pygame.transform.scale(current_background, (SCREEN_WIDTH, S
 
 
 # Sounds
+
 if current_level == 1:
     mixer.music.load("Images/mixkit-subway-old-depart-ambience-2679.wav")
     mixer.music.play(-1)  # play non-stop
@@ -46,6 +47,7 @@ if current_level == 2:
     mixer.music.play(-1)  # play non-stop
 
 # Classes
+
 class Player(pygame.sprite.Sprite):
     frog_position = [500, 675]  # Initial position of the frog
 
@@ -180,6 +182,7 @@ class Car(pygame.sprite.Sprite):
 
 
 	# Create cars
+
 cars = pygame.sprite.Group()
 car_images_right = [
      "Images/car3-right.png", "Images/car4-right.png", "Images/car5-right.png", "Images/car6-right.png"
@@ -284,7 +287,6 @@ class Gator(pygame.sprite.Sprite):
             self.rect.x += self.speed
             if self.rect.right > SCREEN_WIDTH:
                 self.rect.x = -self.rect.width
-                #self.rect.y = SCREEN_HEIGHT - self.rect.height  # Reset the position at the bottom of the screen
                 self.rect.y = pos_y
                 self.speed = random.randrange(1, 4)
 
@@ -528,34 +530,6 @@ while running:
        current_background = swamp_bg
 
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_RIGHT]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
-        Jump_sound.play()
-        player.animate()
-        player.move_right()
-
-    elif keys[pygame.K_LEFT]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
-        Jump_sound.play()
-        player.animate()
-        player.move_left()
-
-    elif keys[pygame.K_UP]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
-        Jump_sound.play()
-        player.animate()
-        player.move_up()
-
-    elif keys[pygame.K_DOWN]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
-        Jump_sound.play()
-        player.animate()
-        player.move_down()
-
-    if player.frog_position[0] >= BG_ROAD_SIZE:
-       current_background = swamp_bg
-
     # Check for collision between player and cars
     for car in cars:
         if pygame.sprite.collide_mask(player, car):
@@ -603,7 +577,7 @@ while running:
         cave_frog4 = CaveFrog(600,150)
         cave_frog_sprites = pygame.sprite.LayeredUpdates()
 
-        all_sprites.add(alligators_sprites, lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
+        all_sprites.add(lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -621,7 +595,6 @@ while running:
         for alligator in range(num_alligators):
             alligator = Gator(200, 400)
             alligators.append(alligator)
-
             all_sprites.add(alligator)
 
     alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
