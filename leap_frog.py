@@ -669,10 +669,7 @@ while running:
     screen.blit(current_background, (scroll_x, scroll_y))
 
     lake_sprites.draw(screen)
-
-    cave_frog_sprites.draw(screen)
-    cave_frog_sprites.update(screen)
-
+    
     all_sprites.draw(screen)
 
     player_sprites.draw(screen)
