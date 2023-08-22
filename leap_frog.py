@@ -461,12 +461,12 @@ car_sprites.add(cars)
 lake_sprites = pygame.sprite.LayeredUpdates()
 
 log1 = Log("Images/log.png", 200, 250, 5)
-log2 = Log("Images/log.png", 300, 500, 5)
-log3 = Log("Images/log.png", 400, 350, -5)
+log2 = Log("Images/log.png", 200, 500, -5)
+log3 = Log("Images/log.png", 400, 350, 5)
 log4 = Log("Images/log.png", 500, 550, -5)
 log5 = Log("Images/log.png", 600, 400, 5)
-log6 = Log("Images/log.png", 700, 300, 5)
-log7 = Log("Images/log.png", 800, 600, -5)
+log6 = Log("Images/log.png", 700, 300, -5)
+log7 = Log("Images/log.png", 800, 600, 5)
 log8 = Log("Images/log.png", 900, 450, -5)
 
 log_sprites = pygame.sprite.LayeredUpdates()
@@ -541,11 +541,6 @@ while running:
     # Check for collision between player and cars
     for car in cars:
         if pygame.sprite.collide_mask(player, car):
-            if player.health == 0 and player.lives > 0:
-                player.lives -= 1
-                player.health = 100
-            elif player.health == 0 and player.lives == 0:
-                player.alive = False
                 player.health -= 10 # Reduce player's health by
                 if player.health == 0 and player.lives > 0:
                     player.lives -= 1
@@ -586,7 +581,7 @@ while running:
         cave_frog4 = CaveFrog(600,150)
         cave_frog_sprites = pygame.sprite.LayeredUpdates()
 
-        all_sprites.add(lilypad_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
+        all_sprites.add(lilypad_sprites, alligators_sprites, log_sprites, cave_sprites, cave_frog_sprites, player_sprites)
 
         for car in cars.sprites():
             car.kill() # remove cars
@@ -606,7 +601,7 @@ while running:
             alligators.append(alligator)
             all_sprites.add(alligator)
 
-    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False, pygame.sprite.collide_mask)
+    alligators_hit = pygame.sprite.spritecollide(player, alligators_sprites, False)
     player_colliding_with_alligator = False
 
     for gator in alligators_hit:
@@ -618,7 +613,7 @@ while running:
             player.alive = False
             player_colliding_with_alligator = True
 
-    if len(alligators_hit) == 0 or pygame.sprite.collide_mask(Log, player):
+    if len(alligators_hit) == 0:
         player_colliding_with_alligator = False
 
     # Check for collision between player and logs
