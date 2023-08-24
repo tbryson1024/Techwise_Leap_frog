@@ -125,7 +125,7 @@ class Player(pygame.sprite.Sprite):
         health_bar_y = self.rect.y - 30  # vertical position of the health bar
 
         pygame.draw.rect(screen, (255, 0, 0),
-                         (health_bar_x, health_bar_y, health_bar_width, health_bar_height))  # Background bar
+                            (health_bar_x, health_bar_y, health_bar_width, health_bar_height))  # Background bar
         pygame.draw.rect(screen, (0, 255, 0), (health_bar_x, health_bar_y, self.health, health_bar_height))  # Health bar
 
     def update(self, speed=0.1):
@@ -142,7 +142,6 @@ class Player(pygame.sprite.Sprite):
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
-      
     def reset_player(self):
         self.direction = "up"
         self.health = 100
@@ -150,8 +149,8 @@ class Player(pygame.sprite.Sprite):
         self.alive = True
 
     def reset_pos(self):
-       self.frog_position = [500, 675]  # Initial position of the frog
-       self.rect.topleft = self.frog_position
+        self.frog_position = [500, 675]  # Initial position of the frog
+        self.rect.topleft = self.frog_position
 
 
 
@@ -185,7 +184,7 @@ class Car(pygame.sprite.Sprite):
 
 cars = pygame.sprite.Group()
 car_images_right = [
-     "Images/car3-right.png", "Images/car4-right.png", "Images/car5-right.png", "Images/car6-right.png"
+        "Images/car3-right.png", "Images/car4-right.png", "Images/car5-right.png", "Images/car6-right.png"
 ]
 car_images_left = [
     "Images/car1-left.png", "Images/car2-left.png", "Images/car3-left.png", "Images/car4-left.png", "Images/car5-left.png", "Images/car6-left.png"
@@ -348,8 +347,8 @@ class Log(pygame.sprite.Sprite):
             self.rect.left = SCREEN_WIDTH
 
     def carry_player(self, player):
-       player.frog_position[0] += self.speed  # Adjust the frog's position based on the log's speed
-       player.rect.topleft = player.frog_position
+        player.frog_position[0] += self.speed  # Adjust the frog's position based on the log's speed
+        player.rect.topleft = player.frog_position
 
     def get_mask(self):
         return pygame.mask.from_surface(self.image)
@@ -369,33 +368,33 @@ class Health_bar:
 
     def draw_health_bars(self):
         pygame.draw.rect(self.screen, (255, 0, 0),
-                         (self.health_bar_x, self.health_bar_y, self.health_bar_width, self.health_bar_height))  # Background bar
+                        (self.health_bar_x, self.health_bar_y, self.health_bar_width, self.health_bar_height))  # Background bar
         pygame.draw.rect(self.screen, (0, 255, 0),
-                         (self.health_bar_x, self.health_bar_y, self.player.health, self.health_bar_height))  # Health bar
+                        (self.health_bar_x, self.health_bar_y, self.player.health, self.health_bar_height))  # Health bar
 
-       # Player Health display
+    # Player Health display
         if not self.player.alive:
             self.screen.fill((0, 0, 0))
-            #game_over_sound = mixer.Sound("game over.wav")
-            #game_over_sound.play()
-            #game_over = pygame.image.load('game over.jpg').convert()
-            #game_over_rect = game_over.get_rect()
-            #game_over_rect.center = (500, 300)
+            game_over_sound = mixer.Sound("sounds/game_over.wav")
+            game_over_sound.play()
+            game_over = pygame.image.load('Images/game_over.jpg').convert()
+            game_over_rect = game_over.get_rect()
+            game_over_rect.center = (500, 300)
             font1 = pygame.font.Font('freesansbold.ttf', 35)
             text1 = font1.render('Press SPACE to restart', True, (255, 255, 255))
             text1Rect = text1.get_rect()
             text1Rect.bottom = 550
             text1Rect.left = 350
-            #self.screen.blit(game_over, game_over_rect)
+            self.screen.blit(game_over, game_over_rect)
             self.screen.blit(text1, text1Rect)
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE]:
-               player.alive = True
-               player.lives = 1
-               player.health = 100
-               player.frog_position = [500, 675]  # Reset the player's position
-               player.rect.topleft = player.frog_position
-               player.direction = "up"
+                player.alive = True
+                player.lives = 1
+                player.health = 100
+                player.frog_position = [500, 675]  # Reset the player's position
+                player.rect.topleft = player.frog_position
+                player.direction = "up"
 
         # Print Lives to screen
         font = pygame.font.Font('freesansbold.ttf', 30)
@@ -436,7 +435,7 @@ class CaveFrog(pygame.sprite.Sprite):
         return pygame.mask.from_surface(self.image)
 
 
- # Initialize objects
+# Initialize objects
 
 new_level = New_level(-10, -70)
 lake = Lake(-2, 255)
@@ -535,7 +534,7 @@ while running:
         player.move_down()
 
     if player.frog_position[0] >= BG_ROAD_SIZE:
-       current_background = swamp_bg
+        current_background = swamp_bg
 
 
     # Check for collision between player and cars
@@ -549,7 +548,7 @@ while running:
                     player.alive = False
 
 
-      # Check for collision between player and new_level
+    # Check for collision between player and new_level
     if pygame.sprite.collide_mask(player, new_level):
         current_level = 2
         player.reset_pos()
@@ -640,10 +639,10 @@ while running:
         cave_frog3.image.set_colorkey((0, 0, 0))
 
     elif current_level == 2 and pygame.sprite.collide_mask(player, cave4):
-       cave_frog_sprites.add(cave_frog4)
-       player.reset_pos()  # Reset the player's position
+        cave_frog_sprites.add(cave_frog4)
+        player.reset_pos()  # Reset the player's position
 
-       cave_frog4.image.set_colorkey((0, 0, 0))
+        cave_frog4.image.set_colorkey((0, 0, 0))
 
         # Draw Screen
     screen.blit(current_background, (scroll_x, scroll_y))
