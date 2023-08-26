@@ -2,7 +2,9 @@ import pygame
 from pygame import Surface, mixer, sprite
 import sys
 import random
+import end_screen
 import menu
+
 
 menu.main()
 
@@ -492,6 +494,7 @@ cave_frog2 = CaveFrog(217,180)
 cave_frog3= CaveFrog(345,180)
 cave_frog4 = CaveFrog(600,150)
 cave_frog_sprites = pygame.sprite.LayeredUpdates()
+cave_frogs = 0
 
 scroll_x = 0
 scroll_y = 0
@@ -547,6 +550,7 @@ while running:
                     player.health = 100
                 elif player.health == 0 and player.lives == 0:
                     player.alive = False
+                    cave_frogs = 0
 
 
     # Check for collision between player and new_level
@@ -611,10 +615,12 @@ while running:
             player.health = 100
         elif player.health == 0 and player.lives == 0:
             player.alive = False
+            cave_frogs = 0
             player_colliding_with_alligator = True
 
     if len(alligators_hit) == 0:
         player_colliding_with_alligator = False
+
 
     # Check for collision between player and logs
     if current_level == 2:
@@ -628,22 +634,28 @@ while running:
         cave_frog_sprites.add(cave_frog1)
         player.reset_pos()
         cave_frog1.image.set_colorkey((0, 0, 0))
+        cave_frogs += 1
 
     elif current_level == 2 and pygame.sprite.collide_mask(player, cave2):
         cave_frog_sprites.add(cave_frog2)
         player.reset_pos()  # Reset the player's position
         cave_frog2.image.set_colorkey((0, 0, 0))
+        cave_frogs += 1
 
     elif current_level == 2 and pygame.sprite.collide_mask(player, cave3):
         cave_frog_sprites.add(cave_frog3)
         player.reset_pos()  # Reset the player's position
         cave_frog3.image.set_colorkey((0, 0, 0))
+        cave_frogs += 1
 
     elif current_level == 2 and pygame.sprite.collide_mask(player, cave4):
         cave_frog_sprites.add(cave_frog4)
         player.reset_pos()  # Reset the player's position
-
         cave_frog4.image.set_colorkey((0, 0, 0))
+        cave_frogs += 1
+
+    if cave_frogs == 4:
+        end_screen.main()
 
         # Draw Screen
     screen.blit(current_background, (scroll_x, scroll_y))
@@ -654,11 +666,11 @@ while running:
 
     player_sprites.draw(screen)
     all_sprites.update()
-
+    cave_frog_sprites.update()
     health_bar.update()
 
     cave_frog_sprites.draw(screen)
-    cave_frog_sprites.update()
+    
 
     pygame.display.flip()
     clock.tick(60)

@@ -24,14 +24,14 @@ def stop_Music():
 # Function to draw the menu with the buttons
 def draw_menu():
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-    text = font.render("Leap Frog Game Over", True, GREEN)  # Black text
+    text = font.render("Leap Frog - You Win!!", True, GREEN)  # Black text
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 100))
 
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
     text = font.render("New Levels and Features coming Spring 2024", True, GREEN)  # Black text
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
 
-    # Draw the start button
+    """ # Draw the start button
     start_button_width, start_button_height = 200, 50
     start_button_x = screen_width // 2 - start_button_width // 2
     start_button_y = 300
@@ -45,10 +45,10 @@ def draw_menu():
     quit_button_y = 400
     pygame.draw.rect(screen, BLACK, (quit_button_x, quit_button_y, quit_button_width, quit_button_height))
     quit_text = font.render("Quit", True, GREEN)
-    screen.blit(quit_text, (quit_button_x + quit_button_width // 2 - quit_text.get_width() // 2, quit_button_y + quit_button_height // 2 - quit_text.get_height() // 2))
+    screen.blit(quit_text, (quit_button_x + quit_button_width // 2 - quit_text.get_width() // 2, quit_button_y + quit_button_height // 2 - quit_text.get_height() // 2)) """
 
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-    text = font.render("Thanks for Playing the Game", True, GREEN)  # Black text
+    text = font.render("Thanks for Playing the Game!", True, GREEN)  # Black text
     screen.blit(text, (screen_width // 2 - text.get_width() // 2, 500))
 
     pygame.display.flip()  # Update the display
