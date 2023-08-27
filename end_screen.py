@@ -4,7 +4,7 @@ pygame.init()
 pygame.mixer.init()
 
 pygame.mixer.music.load("sounds/mixkit-completion-of-a-level-2063.wav")
-pygame.mixer.music.play()
+pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(1)
 
 screen_width = 1080
@@ -23,13 +23,17 @@ def stop_Music():
 
 # Function to draw the menu with the buttons
 def draw_menu():
-    font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
-    text = font.render("Leap Frog - You Win!!", True, GREEN)  # Black text
-    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 100))
+    font = pygame.font.Font('fonts/Lilita_One.ttf', 56)
+    text = font.render("Leap Frog", True, GREEN)  # Black text
+    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
+
+    ont = pygame.font.Font('fonts/Lilita_One.ttf', 36)
+    text = font.render("YOU WIN!!", True, GREEN)  # Black text
+    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 300))
 
     font = pygame.font.Font('fonts/Lilita_One.ttf', 36)
     text = font.render("New Levels and Features coming Spring 2024", True, GREEN)  # Black text
-    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 200))
+    screen.blit(text, (screen_width // 2 - text.get_width() // 2, 400))
 
     """ # Draw the start button
     start_button_width, start_button_height = 200, 50
