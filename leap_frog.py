@@ -514,25 +514,25 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
-        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
+        Jump_sound = mixer.Sound("sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_right()
 
     elif keys[pygame.K_LEFT]:
-        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
+        Jump_sound = mixer.Sound("sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_left()
 
     elif keys[pygame.K_UP]:
-        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
+        Jump_sound = mixer.Sound("sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_up()
 
     elif keys[pygame.K_DOWN]:
-        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
+        Jump_sound = mixer.Sound("sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_down()
