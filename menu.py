@@ -5,7 +5,7 @@ pygame.mixer.init()
 
 pygame.mixer.music.load("sounds/birds.mp3")
 pygame.mixer.music.play()
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.set_volume(1.0)
 
 
 screen_width = 1080
