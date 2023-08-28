@@ -3,9 +3,9 @@ from pygame import mixer
 pygame.init()
 pygame.mixer.init()
 
-pygame.mixer.music.load("sounds/mixkit-completion-of-a-level-2063.wav")
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(1)
+#pygame.mixer.music.load("sounds/mixkit-completion-of-a-level-2063.wav")
+#pygame.mixer.music.play(-1)
+#pygame.mixer.music.set_volume(1)
 
 screen_width = 1080
 screen_height = 720

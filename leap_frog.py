@@ -514,25 +514,25 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
+        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_right()
 
     elif keys[pygame.K_LEFT]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
+        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_left()
 
     elif keys[pygame.K_UP]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
+        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_up()
 
     elif keys[pygame.K_DOWN]:
-        Jump_sound = mixer.Sound("Images/jump.wav")
+        Jump_sound = mixer.Sound("Sounds/Frog-ribbit.mp3")
         Jump_sound.play()
         player.animate()
         player.move_down()
@@ -655,6 +655,9 @@ while running:
         cave_frogs += 1
 
     if cave_frogs == 4:
+        pygame.mixer.music.load("sounds/mixkit-completion-of-a-level-2063.wav")
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(1)
         end_screen.main()
 
         # Draw Screen
