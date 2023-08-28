@@ -595,7 +595,7 @@ while running:
         player.reset_player()
 
         swamp_sound = mixer.music.load("Images/mixkit-insects-birds-and-frogs-in-the-swamp-ambience-40.wav")
-        mixer.music.play()
+        mixer.music.play(-1)
 
         alligators = []
         num_alligators = 4
