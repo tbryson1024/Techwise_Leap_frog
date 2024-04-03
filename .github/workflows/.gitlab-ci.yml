@@ -1,0 +1,11 @@
+stages:
+    - submit
+
+job_submit:
+    stage: submit
+    script:
+        - TSID=1000000
+        - echo $CI_COMMIT_BRANCH | grep "tw-session"
+        - FORM_PAYLOAD="branch=$CI_COMMIT_BRANCH&sha=$CI_COMMIT_SHORT_SHA&url=$CI_REPOSITORY_URL&message=$CI_COMMIT_MESSAGE&author=$CI_COMMIT_AUTHOR"
+        - |
+            curl --fail-with-body -H "Content-Type: application/x-www-form-urlencoded" -d "$FORM_PAYLOAD" -X POST "http://172.104.5.197/workbook/submit/$TSID"
